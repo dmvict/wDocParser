@@ -3,5 +3,11 @@ let _ = require( 'wdocparser' );
 
 /**/
 
-___
+let jsParser = new _.docgen.ParserJsdoc
+({
+  files
+});
+
+jsParser.form();
+jsParser.parse();
 

@@ -1,11 +1,11 @@
 {
   "name" : "wdocparser", 
-  "version" : "0.3.1", 
-  "description" : "___", 
+  "version" : "0.3.2", 
+  "description" : "Module transforms jsdoc comments into data for wDocGenerator", 
   "author" : "Kostiantyn Wandalen <wanalen@willbe.so>", 
   "license" : "MIT", 
-  "main" : "proto/dwtools/___", 
-  "files" : [ "proto/dwtools/___", "proto/dwtools/Tools.s" ], 
+  "main" : "proto/dwtools/atop/docparser/IncludeTop.js", 
+  "files" : [ "proto/dwtools/docparser", "proto/dwtools/Tools.s" ], 
   "scripts" : { "test" : "wtest .run proto", "docgen" : "wdocgen .build proto" }, 
   "repository" : 
   {
@@ -16,7 +16,14 @@
   {
     "url" : "https ://github.com/Wandalen/wDocParser/issues"
   }, 
-  "dependencies" : { "wTools" : "" }, 
+  "dependencies" : 
+  {
+    "wTools" : "", 
+    "wFiles" : "", 
+    "wCopyable" : "", 
+    "wCosequence" : "", 
+    "doctrine" : ""
+  }, 
   "devDependencies" : { "wTesting" : "", "wdocparser" : "file:." }, 
   "keywords" : [ "wTools" ]
 }
