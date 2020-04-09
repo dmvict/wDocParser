@@ -1,41 +1,22 @@
-
 {
-  "name" : "wdocparser",
-  "version" : "0.3.0",
-  "description" : "___",
-  "author" : "Kostiantyn Wandalen <wanalen@willbe.so>",
-  "license" : "MIT",
-  "main" : "proto/dwtools/___",
-  "files" :
-  [
-    "proto/dwtools/___",
-    "proto/dwtools/Tools.s"
-  ],
-  "scripts" :
+  "name" : "wdocparser", 
+  "version" : "0.3.1", 
+  "description" : "___", 
+  "author" : "Kostiantyn Wandalen <wanalen@willbe.so>", 
+  "license" : "MIT", 
+  "main" : "proto/dwtools/___", 
+  "files" : [ "proto/dwtools/___", "proto/dwtools/Tools.s" ], 
+  "scripts" : { "test" : "wtest .run proto", "docgen" : "wdocgen .build proto" }, 
+  "repository" : 
   {
-    "test" : "wtest .run proto",
-    "docgen" : "wdocgen .build proto"
-  },
-  "repository" :
-  {
-    "type" : "git",
+    "type" : "git", 
     "url" : "https ://github.com/Wandalen/wDocParser.git"
-  },
-  "bugs" :
+  }, 
+  "bugs" : 
   {
     "url" : "https ://github.com/Wandalen/wDocParser/issues"
-  },
-  "dependencies" :
-  {
-    "wTools" : ""
-  },
-  "devDependencies" :
-  {
-    "wTesting" : "",
-    "wdocparser" : "file:."
-  },
-  "keywords" :
-  [
-    "wTools"
-  ]
+  }, 
+  "dependencies" : { "wTools" : "" }, 
+  "devDependencies" : { "wTesting" : "", "wdocparser" : "file:." }, 
+  "keywords" : [ "wTools" ]
 }
