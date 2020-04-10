@@ -54,42 +54,70 @@ function form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
-  _.assert( _.longIs( self.files ) );
-
-  if( !self.files.length )
-  throw _.err( `Option {-files-} of parser ${self.shortName} should contain at least one source file path.` )
-
+  _.assert( _.strDefined( self.inPath ) || _.objectIs( self.inPath ) );
+  _.assert( self.basePath === null || _.strIs( self.basePath ) );
+  
+  self.product = new _.docgen.Product();
+  self.product.form();
 }
+//
 
 function parse()
 {
   let self = this;
-  let result = Object.create( null );
-  let files = self.files;
+  
+  self.filesFind();
+  
   let cons = [];
-
-  files.forEach( ( file ) =>
+  
+  self.files.forEach( ( file ) =>
   {
-    let ready = self.parseAct( file );
-    ready.finally( ( err, got ) =>
-    {
-      if( err )
-      _.errLogOnce( err );
-      else
-      result[ got.file ] = got.data;
-    })
-    cons.push( ready )
+    let con = self.parseAct( file );
+    cons.push( con )
   })
 
-  return _.Consequence.AndTake( cons )
-  .then( () => result )
+  let ready = _.Consequence.AndTake( cons );
+  
+  ready.then( () => self.product )
+  
+  return ready;
 }
 
 //
 
-let parseAct = null;
+function parseAct()
+{
+  _.assert( 0, 'not implemented' );
+}
 
 //
+
+function filesFind()
+{ 
+  let self = this;
+  let fileProvider = self.provider;
+  
+  self.inPath = fileProvider.recordFilter
+  ({ 
+    filePath : self.inPath, 
+    ends : self.exts 
+  });
+  self.inPath.form();
+  // if( o.basePath === null )
+  // o.basePath = o.inPath.basePathSimplest()
+  // if( o.basePath === null )
+  // o.basePath = path.current();
+  // if( o.inPath.prefixPath && path.isRelative( o.inPath.prefixPath ) )
+  // o.basePath = path.resolve( o.basePath );
+  // o.inPath.basePathUse( o.basePath );
+  self.files = fileProvider.filesFind
+  ({
+    filter : self.inPath,
+    mode : 'distinct',
+    outputFormat : 'absolute',
+    withDirs : false
+  });
+}
 
 // --
 // relations
@@ -97,7 +125,8 @@ let parseAct = null;
 
 let Composes =
 {
-  files : null,
+  inPath : null,
+  basePath : null,
   verbosity : 1
 }
 
@@ -109,6 +138,8 @@ let Associates =
 
 let Restricts =
 {
+  files : null,
+  product : null
 }
 
 let Medials =
@@ -141,6 +172,8 @@ let Extend =
 
   parse,
   parseAct,
+  
+  filesFind,
 
   // relations
 
