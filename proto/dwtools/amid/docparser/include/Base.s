@@ -12,7 +12,6 @@ if( typeof module !== 'undefined' )
   _.include( 'wConsequence' );
   _.include( 'wIntrospector' );
 
-  _.docgen = _.docgen || Object.create( null );
 }
 
 if( typeof module !== 'undefined' && module !== null )

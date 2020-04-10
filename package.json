@@ -1,33 +1,41 @@
 {
-  "name" : "wdocparser", 
-  "version" : "0.3.5", 
-  "description" : "Module transforms jsdoc comments into data for wDocGenerator", 
-  "author" : "Kostiantyn Wandalen <wanalen@willbe.so>", 
-  "license" : "MIT", 
-  "main" : "proto/dwtools/atop/docparser/IncludeMid.s", 
-  "files" : [ "proto/dwtools/docparser", "proto/dwtools/Tools.s" ], 
-  "scripts" : { "test" : "wtest .run proto", "docgen" : "wdocgen .build proto" }, 
-  "repository" : 
-  {
-    "type" : "git", 
-    "url" : "https ://github.com/Wandalen/wDocParser.git"
-  }, 
-  "bugs" : 
-  {
-    "url" : "https ://github.com/Wandalen/wDocParser/issues"
-  }, 
-  "dependencies" : 
-  {
-    "wTools" : "alpha", 
-    "wFiles" : "alpha", 
-    "wCopyable" : "alpha", 
-    "wConsequence" : "alpha", 
-    "wlooker" : "alpha", 
-    "wlookerextra" : "alpha", 
-    "wschema" : "alpha", 
-    "wintrospector" : "alpha", 
-    "doctrine" : "3.0.0"
-  }, 
-  "devDependencies" : { "wdocparser" : "file:.", "wTesting" : "alpha" }, 
-  "keywords" : [ "wTools" ]
+  "name": "wdocparser",
+  "version": "0.3.5",
+  "description": "Module transforms jsdoc comments into data for wDocGenerator",
+  "author": "Kostiantyn Wandalen <wanalen@willbe.so>",
+  "license": "MIT",
+  "main": "proto/dwtools/atop/docparser/IncludeMid.s",
+  "files": [
+    "proto/dwtools/docparser",
+    "proto/dwtools/Tools.s"
+  ],
+  "scripts": {
+    "test": "wtest .run proto",
+    "docgen": "wdocgen .build proto"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https ://github.com/Wandalen/wDocParser.git"
+  },
+  "bugs": {
+    "url": "https ://github.com/Wandalen/wDocParser/issues"
+  },
+  "dependencies": {
+    "wTools": "alpha",
+    "wFiles": "alpha",
+    "wCopyable": "alpha",
+    "wConsequence": "alpha",
+    "wlooker": "alpha",
+    "wlookerextra": "alpha",
+    "wschema": "alpha",
+    "wintrospector": "alpha",
+    "doctrine": "3.0.0"
+  },
+  "devDependencies": {
+    "wdocparser": "file:.",
+    "wTesting": "alpha"
+  },
+  "keywords": [
+    "wTools"
+  ]
 }

@@ -5,13 +5,15 @@
 if( typeof module !== 'undefined' )
 {
   require( './Base.s' );
-  
-  require( '../l1/Entity.s' );
-  require( '../l1/EntityJsdoc.s' );
-  require( '../l1/Product.s' );
-  
-  require( '../l2/aParser.s' );
-  require( '../l2/bParserJsdoc.s' );
+
+  require( '../l1/Namespace.s' );
+
+  require( '../l3/Entity.s' );
+  require( '../l3/Product.s' );
+  require( '../l3/Parser.s' );
+
+  require( '../l5/EntityJsdoc.s' );
+  require( '../l5/ParserJsdoc.s' );
 }
 
 if( typeof module !== 'undefined' && module !== null )
