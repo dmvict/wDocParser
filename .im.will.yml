@@ -2,31 +2,31 @@
 
 submodule :
 
-  wTools : 
+  wTools :
     path : npm:///wTools
     enabled : 0 # submodule
-  wFiles : 
+  wFiles :
     path : npm:///wFiles
     enabled : 0 # submodule
-  wCopyable : 
+  wCopyable :
     path : npm:///wCopyable
     enabled : 0 # submodule
-  wConsequence : 
+  wConsequence :
     path : npm:///wConsequence
     enabled : 0 # submodule
-  wLooker : 
+  wLooker :
     path : npm:///wlooker
     enabled : 0 # submodule
-  wLookerExtra : 
+  wLookerExtra :
     path : npm:///wlookerextra
     enabled : 0 # submodule
-  wSchema : 
+  wSchema :
     path : npm:///wschema
     enabled : 0 # submodule
-  wIntrospector : 
+  wIntrospector :
     path : npm:///wintrospector
     enabled : 0 # submodule
-  doctrine : 
+  doctrine :
     path : npm:///doctrine
     enabled : 0 # submodule
 
@@ -243,4 +243,3 @@ build :
       - build::raw.release
       - build::release
       - build::npm
-

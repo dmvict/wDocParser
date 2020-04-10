@@ -2,6 +2,11 @@
 
 'use strict';
 
+/**
+ * Module for parsing documentation inlined into source code.
+  @module Tools/mid/wDocParser
+*/
+
 if( typeof module !== 'undefined' )
 {
   require( './include/Base.s' );
