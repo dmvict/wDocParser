@@ -1,4 +1,4 @@
-( function _aParser_s_() {
+( function _Parser_s_() {
 
 'use strict';
 
@@ -54,7 +54,7 @@ function form()
 
   self.product = new _.docgen.Product();
   self.product.form();
-  
+
   self._form();
 }
 
@@ -158,13 +158,13 @@ let Extend =
 
   init,
   finit,
-  
+
   _form : null,
   form,
-  
+
   _parse : null,
   parse,
-  
+
   filesFind,
 
   // relations

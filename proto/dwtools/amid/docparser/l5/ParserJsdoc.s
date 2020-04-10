@@ -1,4 +1,4 @@
-( function _bParserJsdoc_s_() {
+( function _ParserJsdoc_s_() {
 
 'use strict';
 
@@ -28,8 +28,8 @@ function _form()
   _.assert( arguments.length === 0 );
 
   self.introspectorSystem = _.introspector.System
-  ({ 
-    defaultParserClass : _.introspector.Parser.JsTreeSitter 
+  ({
+    defaultParserClass : _.introspector.Parser.JsTreeSitter
   });
 }
 
@@ -38,14 +38,14 @@ function _form()
 function _parse( filePath )
 {
   let self = this;
-  
+
   return self.provider.fileRead({ filePath, sync : 0 })
-  .then( sourceCode => 
+  .then( sourceCode =>
   {
     let file = _.introspector.File({ data : sourceCode, sys : self.introspectorSystem });
     file.refine();
     file.product.byType.gComment.each( e =>
-    { 
+    {
       let parsedComment = doctrine.parse( doctrine.unwrapComment( e.text ), { strict : false, recoverable : true ,sloppy : true } );
       let entity = new _.docgen.EntityJsdoc
       ({
