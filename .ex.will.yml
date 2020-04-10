@@ -3,7 +3,7 @@
 about :
 
   name : 'wDocParser'
-  description : 'Module transforms jsdoc comments into data for wDocGenerator'
+  description : 'Module for parsing jsdoc-like comments.'
   version : '0.4.0'
   enabled : 1
   interpreters :

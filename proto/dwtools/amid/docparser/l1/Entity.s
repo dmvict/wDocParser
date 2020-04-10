@@ -1,22 +1,17 @@
-( function _Product_s_() {
+( function _Entity_s_() {
 
 'use strict';
-
-if( typeof module !== 'undefined' )
-{
-  require( '../IncludeBase.s' );
-}
 
 //
 
 let _ = _global_.wTools;
 let Parent = null;
-let Self = function wProduct( o )
+let Self = function wEntity( o )
 {
   return _.workpiece.construct( Self, this, arguments );
 }
 
-Self.shortName = 'Product';
+Self.shortName = 'Entity';
 
 // --
 // routines
@@ -32,6 +27,13 @@ function init( o )
 
   if( o )
   self.copy( o );
+
+  _.assert( _.objectIs( self.structure ) );
+  _.assert( _.strIs( self.comment ) );
+  _.assert( _.strIs( self.filePath ) );
+  _.assert( _.objectIs( self.position ) );
+  
+  self._form();
 }
 
 //
@@ -47,25 +49,22 @@ function form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
-  
-  self.byType.namespace = [];
-  self.byType.module = [];
-  self.byType.class = [];
 }
 
-function addEntity( entity )
+//
+
+function typeGet()
 {
   let self = this;
-  _.assert( entity instanceof _.docgen.EntityJsdoc );
-  
-  self.entities.push( entity );
-  
-  let type = entity.typeGet();
-  if( self.byType[ type ] )
-  self.byType[ type ].push( entity );
-  
-  if( entity.orphanIs() )
-  self.orphans.push( entity );
+  return self._typeGet();
+}
+
+//
+
+function orphanIs()
+{
+  let self = this;
+  return self._orphanIs();
 }
 
 // --
@@ -74,9 +73,10 @@ function addEntity( entity )
 
 let Composes =
 {
-  entities : _.define.own([]),
-  byType : _.define.own({}),
-  orphans : _.define.own([]),
+  structure : null,
+  comment : null,
+  filePath : null,
+  position : null,
 }
 
 let Associates =
@@ -84,7 +84,9 @@ let Associates =
 }
 
 let Restricts =
-{
+{ 
+  tags : _.define.own({}),
+  formed : 0,
 }
 
 let Medials =
@@ -113,10 +115,15 @@ let Extend =
   init,
   finit,
 
+  _form : null,
   form,
-
-  addEntity,
   
+  _typeGet : null,
+  typeGet,
+  
+  _orphanIs : null,
+  orphanIs,
+
   // relations
 
   Composes,

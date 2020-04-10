@@ -2,11 +2,6 @@
 
 'use strict';
 
-if( typeof module !== 'undefined' )
-{
-  require( '../IncludeBase.s' );
-}
-
 //
 
 let _ = _global_.wTools;
@@ -22,30 +17,13 @@ Self.shortName = 'EntityJsdoc';
 // routines
 // --
 
-function init( o )
-{
-  let self = this;
-  Parent.prototype.init.apply( self,arguments );
-}
-
-//
-
-function finit()
-{
-  return _.Copyable.prototype.finit.apply( this, arguments );
-}
-
-//
-
-function form()
+function _form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
   
   if( self.formed )
   return;
-
-  Parent.prototype.form.call( self );
   
   self._formTags();
   
@@ -71,7 +49,7 @@ function _formTags()
 
 //
 
-function typeGet()
+function _typeGet()
 {
   let self = this;
   
@@ -92,7 +70,7 @@ function typeGet()
 
 //
 
-function orphanIs()
+function _orphanIs()
 {
   let self = this;
   
@@ -154,14 +132,11 @@ let Forbids =
 let Extend =
 {
 
-  init,
-  finit,
-
-  form,
+  _form,
   _formTags,
   
-  typeGet,
-  orphanIs,
+  _typeGet,
+  _orphanIs,
 
   // relations
 

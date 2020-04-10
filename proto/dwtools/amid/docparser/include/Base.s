@@ -5,11 +5,12 @@
 if( typeof module !== 'undefined' )
 {
 
-  let _ = require( '../../Tools.s' );
+  let _ = require( '../../../Tools.s' );
 
   _.include( 'wCopyable' );
   _.include( 'wFiles' );
   _.include( 'wConsequence' );
+  _.include( 'wIntrospector' );
 
   _.docgen = _.docgen || Object.create( null );
 }

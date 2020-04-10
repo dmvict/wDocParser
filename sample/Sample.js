@@ -1,13 +1,21 @@
 
 let _ = require( 'wdocparser' );
 
-/**/
+/**
+ * @description This sample shows how to use the parser
+ * @file Sample.js
+*/
 
 let jsParser = new _.docgen.ParserJsdoc
 ({
-  files
+  inPath : __filename
 });
 
 jsParser.form();
-jsParser.parse();
+let ready = jsParser.parse();
 
+ready.then( ( product ) => 
+{
+  console.log( _.toJson( product.entities ) )
+  return null;
+})

@@ -7,7 +7,7 @@ if( typeof module !== 'undefined' ) {
   let _ = require( '../../Tools.s' );
   _.include( 'wTesting' );
   
-  require( '../docparser/IncludeMid.s' );
+  require( '../docparser/Include.s' );
 
 }
 

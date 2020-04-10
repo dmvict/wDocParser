@@ -2,11 +2,6 @@
 
 'use strict';
 
-if( typeof module !== 'undefined' )
-{
-  require( '../IncludeBase.s' );
-}
-
 //
 
 let _ = _global_.wTools;
@@ -59,7 +54,10 @@ function form()
   
   self.product = new _.docgen.Product();
   self.product.form();
+  
+  self._form();
 }
+
 //
 
 function parse()
@@ -72,7 +70,7 @@ function parse()
   
   self.files.forEach( ( file ) =>
   {
-    let con = self.parseAct( file );
+    let con = self._parse( file );
     cons.push( con )
   })
 
@@ -81,13 +79,6 @@ function parse()
   ready.then( () => self.product )
   
   return ready;
-}
-
-//
-
-function parseAct()
-{
-  _.assert( 0, 'not implemented' );
 }
 
 //
@@ -167,11 +158,12 @@ let Extend =
 
   init,
   finit,
-
+  
+  _form : null,
   form,
-
+  
+  _parse : null,
   parse,
-  parseAct,
   
   filesFind,
 
