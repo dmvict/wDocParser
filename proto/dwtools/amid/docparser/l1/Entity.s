@@ -84,7 +84,7 @@ let Associates =
 }
 
 let Restricts =
-{ 
+{
   tags : _.define.own({}),
   formed : 0,
 }
