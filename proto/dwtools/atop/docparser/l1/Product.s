@@ -47,23 +47,25 @@ function form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
-  
+
   self.byType.namespace = [];
   self.byType.module = [];
   self.byType.class = [];
 }
 
+//
+
 function addEntity( entity )
 {
   let self = this;
   _.assert( entity instanceof _.docgen.EntityJsdoc );
-  
+
   self.entities.push( entity );
-  
+
   let type = entity.typeGet();
   if( self.byType[ type ] )
   self.byType[ type ].push( entity );
-  
+
   if( entity.orphanIs() )
   self.orphans.push( entity );
 }
@@ -116,7 +118,7 @@ let Extend =
   form,
 
   addEntity,
-  
+
   // relations
 
   Composes,

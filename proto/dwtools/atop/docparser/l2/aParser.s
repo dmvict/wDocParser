@@ -56,20 +56,21 @@ function form()
   _.assert( arguments.length === 0 );
   _.assert( _.strDefined( self.inPath ) || _.objectIs( self.inPath ) );
   _.assert( self.basePath === null || _.strIs( self.basePath ) );
-  
+
   self.product = new _.docgen.Product();
   self.product.form();
 }
+
 //
 
 function parse()
 {
   let self = this;
-  
+
   self.filesFind();
-  
+
   let cons = [];
-  
+
   self.files.forEach( ( file ) =>
   {
     let con = self.parseAct( file );
@@ -77,9 +78,9 @@ function parse()
   })
 
   let ready = _.Consequence.AndTake( cons );
-  
+
   ready.then( () => self.product )
-  
+
   return ready;
 }
 
@@ -93,14 +94,14 @@ function parseAct()
 //
 
 function filesFind()
-{ 
+{
   let self = this;
   let fileProvider = self.provider;
-  
+
   self.inPath = fileProvider.recordFilter
-  ({ 
-    filePath : self.inPath, 
-    ends : self.exts 
+  ({
+    filePath : self.inPath,
+    ends : self.exts
   });
   self.inPath.form();
   // if( o.basePath === null )
@@ -172,7 +173,7 @@ let Extend =
 
   parse,
   parseAct,
-  
+
   filesFind,
 
   // relations

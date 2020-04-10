@@ -41,24 +41,24 @@ function form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
-  
+
   if( self.formed )
   return;
 
   Parent.prototype.form.call( self );
-  
+
   self._formTags();
-  
+
   self.formed = 1;
 }
 
 //
 
 function _formTags()
-{ 
+{
   let self = this;
-  self.structure.tags.forEach( ( tag ) => 
-  { 
+  self.structure.tags.forEach( ( tag ) =>
+  {
     if( self.tags[ tag.title ] )
     {
       self.tags[ tag.title ] = _.arrayAs( self.tags[ tag.title ] );
@@ -74,19 +74,19 @@ function _formTags()
 function typeGet()
 {
   let self = this;
-  
+
   if( self.tags.function || self.tags.method )
   return 'function';
-  
+
   if( self.tags.class )
   return 'class';
-  
+
   if( self.tags.namespace )
   return 'namespace';
-  
+
   if( self.tags.module )
   return 'module';
-  
+
   return 'entity';
 }
 
@@ -95,21 +95,21 @@ function typeGet()
 function orphanIs()
 {
   let self = this;
-  
+
   let type = self.typeGet();
-  
+
   if( type === 'module' )
   return false;
-  
+
   if( type === 'namespace' && !self.tags.module )
   return true;
-  
+
   if( type === 'class' && !self.tags.module )
   return true;
-  
+
   if( !self.tags.module && !self.tags.namespace && !self.tags.class )
   return true;
-  
+
   return false;
 }
 
@@ -159,7 +159,7 @@ let Extend =
 
   form,
   _formTags,
-  
+
   typeGet,
   orphanIs,
 
