@@ -1,10 +1,10 @@
 {
   "name" : "wdocparser", 
   "version" : "0.3.5", 
-  "description" : "Module transforms jsdoc comments into data for wDocGenerator", 
+  "description" : "Module for parsing jsdoc-like comments.", 
   "author" : "Kostiantyn Wandalen <wanalen@willbe.so>", 
   "license" : "MIT", 
-  "main" : "proto/dwtools/atop/docparser/IncludeMid.s", 
+  "main" : "proto/dwtools/amid/docparser/Include.s", 
   "files" : [ "proto/dwtools/docparser", "proto/dwtools/Tools.s" ], 
   "scripts" : { "test" : "wtest .run proto", "docgen" : "wdocgen .build proto" }, 
   "repository" : 

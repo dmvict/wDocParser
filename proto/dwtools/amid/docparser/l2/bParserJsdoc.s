@@ -4,11 +4,6 @@
 
 if( typeof module !== 'undefined' )
 {
-  let _ = require( '../IncludeBase.s' );
-  require( './aParser.s' )
-  
-  _.include( 'wIntrospector' );
-  
   var doctrine = require( 'doctrine' );
 }
 
@@ -27,29 +22,12 @@ Self.shortName = 'ParserJsdoc';
 // routines
 // --
 
-function init( o )
-{
-  let self = this;
-  Parent.prototype.init.apply( self,arguments );
-}
-
-//
-
-function finit()
-{
-  return _.Copyable.prototype.finit.apply( this, arguments );
-}
-
-//
-
-function form()
+function _form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
 
-  Parent.prototype.form.call( self );
-
-  self.sys = _.introspector.System
+  self.introspectorSystem = _.introspector.System
   ({ 
     defaultParserClass : _.introspector.Parser.JsTreeSitter 
   });
@@ -57,14 +35,14 @@ function form()
 
 //
 
-function parseAct( filePath )
+function _parse( filePath )
 {
   let self = this;
   
   return self.provider.fileRead({ filePath, sync : 0 })
   .then( sourceCode => 
   {
-    let file = _.introspector.File({ data : sourceCode, sys : self.sys });
+    let file = _.introspector.File({ data : sourceCode, sys : self.introspectorSystem });
     file.refine();
     file.product.byType.gComment.each( e =>
     { 
@@ -98,7 +76,7 @@ let Associates =
 
 let Restricts =
 {
-  sys : null
+  introspectorSystem : null
 }
 
 let Medials =
@@ -124,12 +102,9 @@ let Forbids =
 let Extend =
 {
 
-  init,
-  finit,
+  _form,
 
-  form,
-
-  parseAct,
+  _parse,
 
   // relations
 
