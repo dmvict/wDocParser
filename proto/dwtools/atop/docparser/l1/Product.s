@@ -1,25 +1,22 @@
-( function _bParserJsdoc_s_() {
+( function _Product_s_() {
 
 'use strict';
 
 if( typeof module !== 'undefined' )
 {
   require( '../IncludeBase.s' );
-  require( './aParser.s' )
-
-  // var doctrine = require( 'doctrine' );
 }
 
 //
 
 let _ = _global_.wTools;
-let Parent = _.docgen.ParserAbstract;
-let Self = function wParserJsdoc( o )
+let Parent = null;
+let Self = function wProduct( o )
 {
   return _.workpiece.construct( Self, this, arguments );
 }
 
-Self.shortName = 'ParserJsdoc';
+Self.shortName = 'Product';
 
 // --
 // routines
@@ -28,7 +25,13 @@ Self.shortName = 'ParserJsdoc';
 function init( o )
 {
   let self = this;
-  Parent.prototype.init.apply( self,arguments );
+
+  _.assert( arguments.length === 0 || arguments.length === 1 );
+
+  _.workpiece.initFields( self );
+
+  if( o )
+  self.copy( o );
 }
 
 //
@@ -44,20 +47,25 @@ function form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
-
-  Parent.prototype.form.call( self );
-
-  let path = self.provider.path;
-
-  self.configPath = path.nativize( path.join( __dirname,  self.configPath ) );
+  
+  self.byType.namespace = [];
+  self.byType.module = [];
+  self.byType.class = [];
 }
 
-//
-
-function parseAct( file )
+function addEntity( entity )
 {
   let self = this;
-  let path = self.provider.path;
+  _.assert( entity instanceof _.docgen.EntityJsdoc );
+  
+  self.entities.push( entity );
+  
+  let type = entity.typeGet();
+  if( self.byType[ type ] )
+  self.byType[ type ].push( entity );
+  
+  if( entity.orphanIs() )
+  self.orphans.push( entity );
 }
 
 // --
@@ -66,6 +74,9 @@ function parseAct( file )
 
 let Composes =
 {
+  entities : _.define.own([]),
+  byType : _.define.own({}),
+  orphans : _.define.own([]),
 }
 
 let Associates =
@@ -104,8 +115,8 @@ let Extend =
 
   form,
 
-  parseAct,
-
+  addEntity,
+  
   // relations
 
   Composes,
@@ -126,6 +137,8 @@ _.classDeclare
   parent : Parent,
   extend : Extend,
 });
+
+_.Copyable.mixin( Self );
 
 //
 
