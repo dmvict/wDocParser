@@ -14,4 +14,7 @@ if( typeof module !== 'undefined' )
   _.docgen = _.docgen || Object.create( null );
 }
 
+if( typeof module !== 'undefined' && module !== null )
+module[ 'exports' ] = _global_.wTools;
+
 })();
