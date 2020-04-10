@@ -27,7 +27,7 @@ function _form()
   let self = this;
   _.assert( arguments.length === 0 );
 
-  self.introspectorSystem = _.introspector.System
+  self.introspector = _.introspector.System
   ({
     defaultParserClass : _.introspector.Parser.JsTreeSitter
   });
@@ -42,7 +42,7 @@ function _parse( filePath )
   return self.provider.fileRead({ filePath, sync : 0 })
   .then( sourceCode =>
   {
-    let file = _.introspector.File({ data : sourceCode, sys : self.introspectorSystem });
+    let file = _.introspector.File({ data : sourceCode, sys : self.introspector });
     file.refine();
     file.product.byType.gComment.each( e =>
     {
@@ -76,7 +76,7 @@ let Associates =
 
 let Restricts =
 {
-  introspectorSystem : null
+  introspector : null
 }
 
 let Medials =

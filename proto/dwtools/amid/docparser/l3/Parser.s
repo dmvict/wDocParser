@@ -118,6 +118,7 @@ let Composes =
 {
   inPath : null,
   basePath : null,
+  exts : null,
   verbosity : 1
 }
 
