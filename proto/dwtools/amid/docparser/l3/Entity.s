@@ -67,6 +67,78 @@ function orphanIs()
   return self._orphanIs();
 }
 
+//
+
+function templateDataMake()
+{
+  let self = this;
+  let type = self.typeGet();
+  
+  if( _.objectIs( self.templateData ) )
+  return self.templateData;
+  
+  let base = EntityPropertiesByType.base;
+  let fields = EntityPropertiesByType[ type ];
+  
+  _.assert( _.objectIs( fields ) );
+  
+  self.templateData = _.mapExtend( null, base, fields );
+  
+  self._templateDataMake();
+  
+  return self.templateData;
+}
+
+//
+
+let BaseEntity = 
+{
+  name : null,
+  summary : null,
+  description : null,
+  kind : null
+}
+
+let ModuleEntity = 
+{
+  module : null
+}
+
+let NamespaceEntity = 
+{
+  namespace : null,
+  module : null
+}
+
+let ClassEntity = 
+{
+  class : null,
+  namespace : null,
+  module : null
+}
+
+let FunctionEntity = 
+{
+  params : null,
+  examples : null,
+  returns : null,
+  throws : null,
+  
+  class : null,
+  namespace : null,
+  module : null
+}
+
+let EntityPropertiesByType = 
+{
+  base : BaseEntity,
+  module : ModuleEntity,
+ 
+  namespace : NamespaceEntity,
+  class : ClassEntity,
+  function : FunctionEntity
+}
+
 // --
 // relations
 // --
@@ -77,6 +149,7 @@ let Composes =
   comment : null,
   filePath : null,
   position : null,
+  templateData : null
 }
 
 let Associates =
@@ -123,7 +196,10 @@ let Extend =
   
   _orphanIs : null,
   orphanIs,
-
+  
+  _templateDataMake : null,
+  templateDataMake,
+  
   // relations
 
   Composes,
