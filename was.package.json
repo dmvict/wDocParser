@@ -5,7 +5,7 @@
   "author" : "Kostiantyn Wandalen <wanalen@willbe.so>", 
   "license" : "MIT", 
   "main" : "proto/dwtools/amid/docparser/Include.s", 
-  "files" : [ "proto/dwtools/docparser", "proto/dwtools/Tools.s" ], 
+  "files" : [ "proto/dwtools/amid/docparser", "proto/dwtools/Tools.s" ], 
   "scripts" : { "test" : "wtest .run proto", "docgen" : "wdocgen .build proto" }, 
   "repository" : 
   {
