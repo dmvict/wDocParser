@@ -60,11 +60,45 @@ function addEntity( entity )
   let type = entity.typeGet();
   if( self.byType[ type ] )
   self.byType[ type ].push( entity );
-
+  
   if( entity.orphanIs() )
-  self.orphans.push( entity );
-}
+  {
+    self.orphans.push( entity );
+  }
+  else if( type !== 'module' )
+  { 
+    if( type === 'namespace' )
+    addToByParent( entity, entity.tags.module )
+    else if( type === 'class' )
+    addToByParent( entity, entity.tags.module )
+    else if( entity.tags.class ) 
+    addToByParent( entity, entity.tags.class )
+    else if( entity.tags.namespace ) 
+    addToByParent( entity, entity.tags.namespace )
+    else if( entity.tags.module ) 
+    addToByParent( entity, entity.tags.module )
+  }
+  
+  /* */
+  
+  function addToByParent( entity, parentTag )
+  { 
+    let parentName = removePrefix( parentTag.name );
+    self.byParent[ parentName ] = self.byParent[ parentName ] || [];
+    self.byParent[ parentName ].push( entity )
+  }
+  
+  function removePrefix( src )
+  {
+    let firstIsSmall = /[a-z]/.test( src[ 0 ] );
+    let secondIsCapital = /[A-Z]/.test( src[ 1 ] );
 
+    if( firstIsSmall && secondIsCapital )
+    return src.slice( 1 );
+    return src;
+  }
+}
+  
 // --
 // relations
 // --
@@ -73,6 +107,7 @@ let Composes =
 {
   entities : _.define.own([]),
   byType : _.define.own({}),
+  byParent : _.define.own({}),
   orphans : _.define.own([]),
 }
 
