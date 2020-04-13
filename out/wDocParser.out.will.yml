@@ -3,17 +3,17 @@ root:
   - wDocParser.out
 consistency:
   ../.ex.will.yml: &ref_0
-    hash: 87f3e7d1a1b60e70931e3456aa3fccba
-    size: 1729
+    hash: 4becdc2ca8444b11381ef6d4bf8d8b7a
+    size: 1727
   ../.im.will.yml: &ref_1
-    hash: 65c4957c60357eb46748fd7272745a38
-    size: 5154
+    hash: fa06b3f9a3c26fadf685935e4c74479b
+    size: 5141
 module:
   wDocParser.out:
     about:
       name: wDocParser
       org: noorg
-      description: Module transforms jsdoc comments into data for wDocGenerator
+      description: Module for parsing documentation inlined into source code.
       enabled: 1
       version: 0.4.0
       interpreters: &ref_2
@@ -106,7 +106,7 @@ module:
       entry.proto.no.tests:
         criterion:
           tests: no.tests
-        path: ../proto/dwtools/atop/docparser/IncludeMid.s
+        path: ../proto/dwtools/amid/docparser/Include.s
       entry.proto.only.tests:
         criterion:
           tests: only.tests
@@ -152,25 +152,29 @@ module:
           - ../proto/dwtools/Tools.s
           - ../proto/dwtools/abase
           - ../proto/dwtools/amid
+          - ../proto/dwtools/amid/docparser
+          - ../proto/dwtools/amid/docparser/Include.s
+          - ../proto/dwtools/amid/docparser/include
+          - ../proto/dwtools/amid/docparser/include/Base.s
+          - ../proto/dwtools/amid/docparser/include/Mid.s
+          - ../proto/dwtools/amid/docparser/l1
+          - ../proto/dwtools/amid/docparser/l1/Namespace.s
+          - ../proto/dwtools/amid/docparser/l3
+          - ../proto/dwtools/amid/docparser/l3/Entity.s
+          - ../proto/dwtools/amid/docparser/l3/Parser.s
+          - ../proto/dwtools/amid/docparser/l3/Product.s
+          - ../proto/dwtools/amid/docparser/l5
+          - ../proto/dwtools/amid/docparser/l5/EntityJsdoc.s
+          - ../proto/dwtools/amid/docparser/l5/ParserJsdoc.s
+          - ../proto/dwtools/amid/docparser.test
+          - ../proto/dwtools/amid/docparser.test/ParserJsdoc.test.s
+          - ../proto/dwtools/amid/docparser.test/_asset
+          - ../proto/dwtools/amid/docparser.test/_asset/basic
+          - ../proto/dwtools/amid/docparser.test/_asset/basic/module.js
+          - ../proto/dwtools/amid/docparser.test/_asset/basic/namespace.js
+          - ../proto/dwtools/amid/docparser.test/_asset/complexDoclet
+          - ../proto/dwtools/amid/docparser.test/_asset/complexDoclet/complex.js
           - ../proto/dwtools/atop
-          - ../proto/dwtools/atop/docparser
-          - ../proto/dwtools/atop/docparser/IncludeBase.s
-          - ../proto/dwtools/atop/docparser/IncludeMid.s
-          - ../proto/dwtools/atop/docparser/l1
-          - ../proto/dwtools/atop/docparser/l1/Entity.s
-          - ../proto/dwtools/atop/docparser/l1/EntityJsdoc.s
-          - ../proto/dwtools/atop/docparser/l1/Product.s
-          - ../proto/dwtools/atop/docparser/l2
-          - ../proto/dwtools/atop/docparser/l2/aParser.s
-          - ../proto/dwtools/atop/docparser/l2/bParserJsdoc.s
-          - ../proto/dwtools/atop/docparser.test
-          - ../proto/dwtools/atop/docparser.test/ParserJsdoc.test.s
-          - ../proto/dwtools/atop/docparser.test/_asset
-          - ../proto/dwtools/atop/docparser.test/_asset/basic
-          - ../proto/dwtools/atop/docparser.test/_asset/basic/module.js
-          - ../proto/dwtools/atop/docparser.test/_asset/basic/namespace.js
-          - ../proto/dwtools/atop/docparser.test/_asset/complexDoclet
-          - ../proto/dwtools/atop/docparser.test/_asset/complexDoclet/complex.js
     submodule:
       wTools:
         path: 'npm:///wTools'
@@ -817,7 +821,7 @@ module:
     about:
       name: wDocParser
       org: noorg
-      description: Module transforms jsdoc comments into data for wDocGenerator
+      description: Module for parsing documentation inlined into source code.
       enabled: 1
       version: 0.4.0
       interpreters: *ref_2
@@ -902,7 +906,7 @@ module:
       entry.proto.no.tests:
         criterion:
           tests: no.tests
-        path: proto/dwtools/atop/docparser/IncludeMid.s
+        path: proto/dwtools/amid/docparser/Include.s
       entry.proto.only.tests:
         criterion:
           tests: only.tests
@@ -1509,8 +1513,8 @@ module:
           - 'build::npm'
     consistency:
       ../.ex.will.yml:
-        hash: 87f3e7d1a1b60e70931e3456aa3fccba
-        size: 1729
+        hash: 4becdc2ca8444b11381ef6d4bf8d8b7a
+        size: 1727
       ../.im.will.yml:
-        hash: 65c4957c60357eb46748fd7272745a38
-        size: 5154
+        hash: fa06b3f9a3c26fadf685935e4c74479b
+        size: 5141
