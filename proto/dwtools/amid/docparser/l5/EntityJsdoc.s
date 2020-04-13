@@ -137,10 +137,16 @@ function _templateDataMake()
     td.module = tags.module.name;
   }
   else if( type === 'class' )
-  {
+  { 
     td.class = tags.class.name;
     td.namespace = tags.namespace.name;
     td.module = tags.module.name;
+    
+    if( tags.classdesc )
+    {
+      td.description = td.description ? td.description + '\n' : '';
+      td.description += tags.classdesc.description; 
+    }
   }
   else
   { 
@@ -150,10 +156,14 @@ function _templateDataMake()
       td.name = tags.method.name;
       td.kind = 'method'
     }
-    else if( tags.class && tags.function )
+    else if( tags.class && tags.function && !tags.static )
     {
       td.kind = 'method'
     }
+    
+    if( type === 'function' )
+    if( tags.static || !tags.class && tags.namespace )
+    td.kind = 'routine';
     
     //
     
@@ -217,6 +227,7 @@ function _templateDataMake()
     
     if( tags.module )
     td.module = tags.module.name;
+    
   }
   
   _.assert( _.strDefined( self.templateData.name ), `Entity should have name. Source structure:${_.toJs( self.structure)}` )
@@ -242,7 +253,11 @@ function _templateDataMake()
     }
     else if( type.type === 'UnionType' )
     { 
-      param.type = type.elements.map( ( t ) => t.name ).join( '\\|' )
+      param.type = type.elements.map( ( t ) => t.name ).join( '|' )
+    }
+    else if( type.type === 'AllLiteral' )
+    {
+      param.type = '*'
     }
   }
   

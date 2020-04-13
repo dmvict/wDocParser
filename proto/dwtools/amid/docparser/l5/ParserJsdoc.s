@@ -38,27 +38,62 @@ function _form()
 function _parse( filePath )
 {
   let self = this;
+  
+  let sourceCode = self.provider.fileRead({ filePath })
+  
+  let file = _.introspector.File({ data : sourceCode, sys : self.introspector });
+  file.refine();
+  
+  if( !file.product.byType.gComment )
+  return null;
+  
+  file.product.byType.gComment.each( comment => self._commentHandle( comment, filePath ) );
+}
 
-  return self.provider.fileRead({ filePath, sync : 0 })
-  .then( sourceCode =>
-  {
-    let file = _.introspector.File({ data : sourceCode, sys : self.introspector });
-    file.refine();
-    file.product.byType.gComment.each( e =>
-    {
-      let parsedComment = doctrine.parse( doctrine.unwrapComment( e.text ), { strict : false, recoverable : true ,sloppy : true } );
-      let entity = new _.docgen.EntityJsdoc
-      ({
-        structure : parsedComment,
-        comment : e.text,
-        filePath : filePath,
-        position : { start : e.startPosition, end : e.endPosition }
-      });
-      entity.form();
-      self.product.addEntity( entity );
-    })
-    return null;
-  })
+//
+
+function _doctrineParseComment( comment )
+{ 
+  let self = this;
+  let o = 
+  { 
+    strict : false, 
+    recoverable : true,
+    sloppy : true 
+  }
+  let structure = doctrine.parse( doctrine.unwrapComment( comment.text ), o );
+  return structure;
+}
+
+//
+
+function _entityMake( structure, comment, filePath )
+{ 
+  let self = this;
+  let entity = new _.docgen.EntityJsdoc
+  ({
+    structure,
+    comment : comment.text,
+    filePath,
+    position : { start : comment.startPosition, end : comment.endPosition }
+  });
+  entity.form();
+  
+  return entity;
+}
+
+//
+
+function _commentHandle( comment, filePath )
+{
+  let self = this;
+  
+  // var t1 = _.time.now();
+  let structure = self._doctrineParseComment( comment );
+  // self.logger.log( `\nSpent ${_.time.spent( t1 )} for doctrine, file: ${filePath}` )
+  
+  let entity = self._entityMake( structure, comment, filePath );
+  self.product.addEntity( entity );
 }
 
 // --
@@ -105,6 +140,10 @@ let Extend =
   _form,
 
   _parse,
+  
+  _doctrineParseComment,
+  _entityMake,
+  _commentHandle,
 
   // relations
 

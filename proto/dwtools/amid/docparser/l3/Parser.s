@@ -66,19 +66,12 @@ function parse()
 
   self.filesFind();
 
-  let cons = [];
-
   self.files.forEach( ( file ) =>
   {
-    let con = self._parse( file );
-    cons.push( con )
+    self._parse( file );
   })
 
-  let ready = _.Consequence.AndTake( cons );
-
-  ready.then( () => self.product )
-
-  return ready;
+  return new _.Consequence().take( self.product )
 }
 
 //
@@ -91,7 +84,8 @@ function filesFind()
   self.inPath = fileProvider.recordFilter
   ({
     filePath : self.inPath,
-    ends : self.exts
+    ends : self.exts,
+    maskAll : { excludeAny : /\.test\./ }
   });
   self.inPath.form();
   // if( o.basePath === null )
