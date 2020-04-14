@@ -33,7 +33,7 @@ function init( o )
   _.assert( _.strIs( self.filePath ) );
   _.assert( _.objectIs( self.position ) );
   
-  self._form();
+
 }
 
 //
@@ -49,6 +49,8 @@ function form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
+  
+  return self._form();
 }
 
 //
@@ -129,6 +131,16 @@ let FunctionEntity =
   module : null
 }
 
+let TypedefEntity =
+{
+  properties : null,
+  type : null,
+  
+  class : null,
+  namespace : null,
+  module : null
+}
+
 let EntityPropertiesByType = 
 {
   base : BaseEntity,
@@ -136,7 +148,10 @@ let EntityPropertiesByType =
  
   namespace : NamespaceEntity,
   class : ClassEntity,
-  function : FunctionEntity
+  function : FunctionEntity,
+  constructor : FunctionEntity,
+  callback : FunctionEntity,
+  typedef : TypedefEntity
 }
 
 // --
@@ -158,7 +173,6 @@ let Associates =
 
 let Restricts =
 {
-  tags : _.define.own({}),
   formed : 0,
 }
 

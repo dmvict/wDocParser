@@ -113,7 +113,8 @@ let Composes =
   inPath : null,
   basePath : null,
   exts : null,
-  verbosity : 1
+  verbosity : 1,
+  inacurate : 0
 }
 
 let Associates =
