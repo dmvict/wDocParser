@@ -53,8 +53,20 @@ function form()
 function addEntity( entity )
 {
   let self = this;
-  _.assert( entity instanceof _.docgen.EntityJsdoc );
+  let entities = _.arrayAs( entity );
+  entities.forEach( entity => 
+  {
+    self._addEntity( entity );
+  })
+}
 
+//
+
+function _addEntity( entity )
+{
+  let self = this;
+  _.assert( entity instanceof _.docgen.EntityJsdoc );
+  
   self.entities.push( entity );
 
   let type = entity.typeGet();
@@ -148,6 +160,7 @@ let Extend =
   form,
 
   addEntity,
+  _addEntity,
 
   // relations
 

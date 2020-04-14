@@ -24,27 +24,10 @@ function _form()
 
   if( self.formed )
   return;
-  
-  self._formTags();
 
   self.formed = 1;
-}
-
-//
-
-function _formTags()
-{
-  let self = this;
-  self.structure.tags.forEach( ( tag ) =>
-  {
-    if( self.tags[ tag.title ] )
-    {
-      self.tags[ tag.title ] = _.arrayAs( self.tags[ tag.title ] );
-      self.tags[ tag.title ].push( tag );
-    }
-    else
-    self.tags[ tag.title ] = tag;
-  })
+  
+  return self;
 }
 
 //
@@ -174,7 +157,6 @@ function _templateDataMake()
       { 
         name : e.name, 
         description : e.description, 
-        type : e.type.name, 
         optional : false
       } 
       
@@ -242,8 +224,11 @@ function _templateDataMake()
   { 
     let type = paramTag.type;
     
+    if( !_.objectIs( type ) )
+    throw _.errBrief( `Can't get type of param tag: ${_.toJs( paramTag )}. \n Comment:${self.comment}`  )
+    
     if( type.type === 'NameExpression' )
-    {
+    { 
       param.type = type.name;
     }
     else if( type.type === 'OptionalType' )
@@ -280,6 +265,7 @@ function _templateDataMake()
 
 let Composes =
 {
+  tags : null
 }
 
 let Associates =
@@ -314,7 +300,6 @@ let Extend =
 {
 
   _form,
-  _formTags,
   
   _typeGet,
   _orphanIs,

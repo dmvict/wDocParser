@@ -33,7 +33,7 @@ function init( o )
   _.assert( _.strIs( self.filePath ) );
   _.assert( _.objectIs( self.position ) );
   
-  self._form();
+
 }
 
 //
@@ -49,6 +49,8 @@ function form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
+  
+  return self._form();
 }
 
 //
@@ -158,7 +160,6 @@ let Associates =
 
 let Restricts =
 {
-  tags : _.define.own({}),
   formed : 0,
 }
 

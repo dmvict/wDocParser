@@ -59,27 +59,11 @@ function _doctrineParseComment( comment )
   { 
     strict : false, 
     recoverable : true,
-    sloppy : true 
+    sloppy : true,
+    range : true
   }
   let structure = doctrine.parse( doctrine.unwrapComment( comment.text ), o );
   return structure;
-}
-
-//
-
-function _entityMake( structure, comment, filePath )
-{ 
-  let self = this;
-  let entity = new _.docgen.EntityJsdoc
-  ({
-    structure,
-    comment : comment.text,
-    filePath,
-    position : { start : comment.startPosition, end : comment.endPosition }
-  });
-  entity.form();
-  
-  return entity;
 }
 
 //
@@ -88,12 +72,109 @@ function _commentHandle( comment, filePath )
 {
   let self = this;
   
-  // var t1 = _.time.now();
   let structure = self._doctrineParseComment( comment );
-  // self.logger.log( `\nSpent ${_.time.spent( t1 )} for doctrine, file: ${filePath}` )
   
-  let entity = self._entityMake( structure, comment, filePath );
+  let entity = self._makeSeveralMaybe( structure, comment, filePath );
   self.product.addEntity( entity );
+}
+
+//
+
+function _tagsToMap( structure )
+{
+  let self = this;
+  
+  let tags = Object.create( null );
+  
+  structure.tags.forEach( ( tag ) =>
+  {
+    if( tags[ tag.title ] )
+    {
+      tags[ tag.title ] = _.arrayAs( tags[ tag.title ] );
+      tags[ tag.title ].push( tag );
+    }
+    else
+    tags[ tag.title ] = tag;
+  })
+  
+  return tags;
+}
+
+//
+
+function _typeTagNameGet( tags )
+{
+  if( tags.function )
+  return 'function';
+
+  if( tags.method )
+  return 'method';
+  
+  if( tags.class )
+  return 'class';
+
+  if( tags.namespace )
+  return 'namespace';
+
+  if( tags.module )
+  return 'module';
+
+  return 'entity';
+}
+
+//
+
+function _entityMake( o )
+{ 
+  let self = this;
+  let entity = new _.docgen.EntityJsdoc( o );
+  return entity.form();
+}
+
+//
+
+function _makeSeveralMaybe( structure, comment, filePath )
+{
+  let self = this;
+  
+  let tags = self._tagsToMap( structure );
+  let type = self._typeTagNameGet( tags );
+  let position = { start : comment.startPosition, end : comment.endPosition }
+  
+  comment = comment.text;
+  
+  let result = [];
+  let tag = tags[ type ];
+  
+  if( !_.arrayIs( tag ) )
+  return self._entityMake
+  ({
+    structure,
+    comment,
+    filePath,
+    position,
+    tags,
+  });
+  
+  for( let i = 0; i < tag.length; i++ )
+  { 
+    let currentTags = _.cloneData({ src : tags });
+    currentTags[ type ] = tag[ i ];
+    
+    let entity = self._entityMake
+    ({
+      structure,
+      comment,
+      filePath,
+      position,
+      tags : currentTags,
+    });
+    entity.form();
+    
+    result.push( entity );
+  }
+  
+  return result;
 }
 
 // --
@@ -142,8 +223,13 @@ let Extend =
   _parse,
   
   _doctrineParseComment,
-  _entityMake,
   _commentHandle,
+  
+  _tagsToMap,
+  _typeTagNameGet,
+  _entityMake,
+  _makeSeveralMaybe,
+ 
 
   // relations
 

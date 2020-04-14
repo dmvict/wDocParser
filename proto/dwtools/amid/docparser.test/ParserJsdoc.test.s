@@ -176,7 +176,7 @@ function routine( test )
   .then( ( got ) =>
   {
     test.is( got instanceof _.docgen.Product );
-    test.identical( got.entities.length, 1 );
+    test.identical( got.entities.length, 2 );
     test.identical( got.orphans.length, 0 );
     test.identical( got.byType.module.length, 0 );
     test.identical( got.byType.namespace.length, 0 )
@@ -188,6 +188,36 @@ function routine( test )
   .then( ( got ) =>
   {
     let namespace = got.entities[ 0 ];
+    var expectedStructure =
+    {
+      description : `Summary`,
+      tags :
+      [
+        { title : 'function', name : 'entityIdentical' },
+        { title : 'function', name : 'identical' },
+        { title : 'namespace', name : 'Tools' },
+        { title : 'module', name : 'Tools/base/Equaler' }
+      ]
+    }
+    let expectedPosition =
+    {
+      start : { row : 0 },
+      end : { row : 7 }
+    }
+
+    test.is( _.strDefined( namespace.comment ) );
+    test.contains( namespace.structure, expectedStructure );
+    test.identical( namespace.filePath, a.abs( 'function.js' ) );
+    test.contains( namespace.position, expectedPosition );
+
+    return got;
+  })
+  
+  //
+  
+  .then( ( got ) =>
+  {
+    let namespace = got.entities[ 1 ];
     var expectedStructure =
     {
       description : `Summary`,
