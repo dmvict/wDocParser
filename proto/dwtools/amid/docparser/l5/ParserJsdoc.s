@@ -35,19 +35,35 @@ function _form()
 
 //
 
+let commentRegexp = /\/\*\*\s*\n([^\*]|(\*(?!\/)))*\*\//g
+
 function _parse( filePath )
 {
   let self = this;
   
   let sourceCode = self.provider.fileRead({ filePath })
   
-  let file = _.introspector.File({ data : sourceCode, sys : self.introspector });
-  file.refine();
-  
-  if( !file.product.byType.gComment )
-  return null;
-  
-  file.product.byType.gComment.each( comment => self._commentHandle( comment, filePath ) );
+  if( !self.inacurate )
+  { 
+    let file = _.introspector.File({ data : sourceCode, sys : self.introspector });
+    file.refine();
+    
+    if( !file.product.byType.gComment )
+    return null;
+    
+    file.product.byType.gComment.each( comment => self._commentHandle( comment, filePath ) );
+  }
+  else
+  {
+    let comments = sourceCode.match( commentRegexp );
+    if( !comments )
+    return;
+    
+    comments.forEach( comment => 
+    {
+      self._commentHandle( { text : comment,startPosition : { row : 0}, endPosition : { row : 0 } }, filePath )
+    })
+  }
 }
 
 //
@@ -69,7 +85,7 @@ function _doctrineParseComment( comment,filePath )
   catch( err )
   { 
     if( self.vebosity )
-    throw _.err( `Failed to parse comment:${comment.text}\nFile:${filePath}\nRow:${comment.startPosition.row}\nReason:`, err )
+    _.errLogOnce( `Failed to parse comment:${comment.text}\nFile:${filePath}\nRow:${comment.startPosition.row}\nReason:`, err )
   }
 }
 
@@ -116,6 +132,9 @@ function _tagsToMap( structure )
 
 function _typeTagNameGet( tags )
 {
+  
+  if( tags.routine )
+  return 'routine';
   
   if( tags.typedef )
   return 'typedef';

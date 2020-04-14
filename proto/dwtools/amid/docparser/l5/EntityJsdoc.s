@@ -45,7 +45,7 @@ function _typeGet()
   if( self.tags.constructor )
   return 'constructor';
 
-  if( self.tags.function || self.tags.method || self.tags.callback )
+  if( self.tags.function || self.tags.method || self.tags.callback || self.tags.routine )
   return 'function';
 
   if( self.tags.class )
@@ -175,6 +175,11 @@ function _templateDataMake()
       td.name = tags.method.name;
       td.kind = 'method'
     }
+    else if( tags.routine )
+    { 
+      td.name = tags.routine.description;
+      td.kind = 'routine'
+    }
     else if( tags.class && tags.function && !tags.static )
     {
       td.kind = 'method'
@@ -207,15 +212,22 @@ function _templateDataMake()
     //
     
     if( tags.returns )
+    td.returns = _.arrayAs( tags.returns ).map( ( e ) => 
     { 
-      _.assert( _.objectIs( tags.returns ), 'Expects signle return tag' );
-      td.returns = 
+      _.assert( _.objectIs( e ), 'Expects signle return tag' );
+      
+      let returns = 
       { 
-        type : tags.returns.type.name, 
-        description : tags.returns.description 
+        description : e.description 
       }
-      paramTypeMake( td.returns, tags.returns )
-    }
+      
+      if( e.type )
+      returns.type = e.type.name;
+      
+      paramTypeMake( returns, e )
+      
+      return returns;
+    })
     
     //
     
@@ -248,7 +260,7 @@ function _templateDataMake()
     
   }
   
-  _.assert( _.strDefined( self.templateData.name ), `Entity should have name.\nType:${type}\n Source structure:${_.toJs( self.structure)}` )
+  _.assert( _.strDefined( self.templateData.name ), `Entity should have name.\nType:${type}\n Source structure:${_.toJs( self.structure)}\n Source comment:${self.comment}` )
   
   self.templateData.name = removePrefix( self.templateData.name );
   
@@ -261,7 +273,11 @@ function _templateDataMake()
     let type = paramTag.type;
     
     if( !_.objectIs( type ) )
-    throw _.errBrief( `Can't get type of param tag: ${_.toJs( paramTag )}. \n Comment:${self.comment}`  )
+    {
+      if( self.verbosity )
+      _.errLogOnce( `Failed to get type of param tag: ${_.toJs( paramTag )}. \n Comment:${self.comment}`  );
+      return;
+    }
     
     if( type.type === 'NameExpression' )
     { 
