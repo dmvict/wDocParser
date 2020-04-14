@@ -173,6 +173,7 @@ module:
           - ../proto/dwtools/amid/docparser.test/ParserJsdoc.test.s
           - ../proto/dwtools/amid/docparser.test/_asset
           - ../proto/dwtools/amid/docparser.test/_asset/basic
+          - ../proto/dwtools/amid/docparser.test/_asset/basic/function.js
           - ../proto/dwtools/amid/docparser.test/_asset/basic/module.js
           - ../proto/dwtools/amid/docparser.test/_asset/basic/namespace.js
           - ../proto/dwtools/amid/docparser.test/_asset/complexDoclet
@@ -1548,6 +1549,4 @@ module:
       ../.im.will.yml:
         hash: fa06b3f9a3c26fadf685935e4c74479b
         size: 5141
-      wDocParser.out.will.yml:
-        hash: aa8daafe3632c208b64792e00cfab467
-        size: 39777
+      wDocParser.out.will.yml: *ref_0
