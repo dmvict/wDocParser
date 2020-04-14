@@ -24,27 +24,10 @@ function _form()
 
   if( self.formed )
   return;
-  
-  self._formTags();
 
   self.formed = 1;
-}
-
-//
-
-function _formTags()
-{
-  let self = this;
-  self.structure.tags.forEach( ( tag ) =>
-  {
-    if( self.tags[ tag.title ] )
-    {
-      self.tags[ tag.title ] = _.arrayAs( self.tags[ tag.title ] );
-      self.tags[ tag.title ].push( tag );
-    }
-    else
-    self.tags[ tag.title ] = tag;
-  })
+  
+  return self;
 }
 
 //
@@ -52,8 +35,17 @@ function _formTags()
 function _typeGet()
 {
   let self = this;
+  
+  if( self.tags.typedef )
+  return 'typedef'
+  
+  if( self.tags.callback )
+  return 'callback'
+  
+  if( self.tags.constructor )
+  return 'constructor';
 
-  if( self.tags.function || self.tags.method )
+  if( self.tags.function || self.tags.method || self.tags.callback || self.tags.routine )
   return 'function';
 
   if( self.tags.class )
@@ -108,14 +100,15 @@ function _templateDataMake()
   if( description )
   {
     description = _.strLinesStrip( description );
-    let lines = _.strLinesSplit( description );
-    td.summary = lines.shift();
-    td.description = lines.join('\n');
+    // let lines = _.strLinesSplit( description );
+    // td.summary = lines.shift();
+    // td.description = lines.join('\n');
+    td.description = description;
   }
   if( tags.summary )
   { 
-    td.summary = td.summary ? td.summary + '\n' : '';
-    td.summary += tags.summary.description; 
+    // td.summary = td.summary ? td.summary + '\n' : '';
+    td.summary = tags.summary.description; 
   }
   if( tags.description )
   {
@@ -124,7 +117,7 @@ function _templateDataMake()
   }
   
   if( tags[ type ] )
-  td.name = tags[ type ].name,
+  td.name = tags[ type ].name || tags[ type ].description; //callback tags stores it name in description
   td.kind = type;
   
   if( type === 'module' )
@@ -134,12 +127,15 @@ function _templateDataMake()
   else if( type === 'namespace' )
   {
     td.namespace = tags.namespace.name;
+    if( tags.module )
     td.module = tags.module.name;
   }
   else if( type === 'class' )
   { 
     td.class = tags.class.name;
+    if( tags.namespace )
     td.namespace = tags.namespace.name;
+    if( tags.module )
     td.module = tags.module.name;
     
     if( tags.classdesc )
@@ -148,6 +144,29 @@ function _templateDataMake()
       td.description += tags.classdesc.description; 
     }
   }
+  else if( type === 'typedef' )
+  {
+    td.name = tags.typedef.name
+    paramTypeMake( td, tags.typedef )
+    
+    if( tags.property )
+    td.properties = _.arrayAs( tags.property ).map( ( e ) => 
+    { 
+      let property = 
+      { 
+        name : e.name, 
+        description : e.description, 
+        optional : false
+      } 
+      
+      if( e.default )
+      property.default = e.default;
+      
+      paramTypeMake( property, e )
+      
+      return property;
+    })
+  }
   else
   { 
     
@@ -155,6 +174,11 @@ function _templateDataMake()
     {
       td.name = tags.method.name;
       td.kind = 'method'
+    }
+    else if( tags.routine )
+    { 
+      td.name = tags.routine.description;
+      td.kind = 'routine'
     }
     else if( tags.class && tags.function && !tags.static )
     {
@@ -174,7 +198,6 @@ function _templateDataMake()
       { 
         name : e.name, 
         description : e.description, 
-        type : e.type.name, 
         optional : false
       } 
       
@@ -189,15 +212,22 @@ function _templateDataMake()
     //
     
     if( tags.returns )
+    td.returns = _.arrayAs( tags.returns ).map( ( e ) => 
     { 
-      _.assert( _.objectIs( tags.returns ), 'Expects signle return tag' );
-      td.returns = 
+      _.assert( _.objectIs( e ), 'Expects signle return tag' );
+      
+      let returns = 
       { 
-        type : tags.returns.type.name, 
-        description : tags.returns.description 
+        description : e.description 
       }
-      paramTypeMake( td.returns, tags.returns )
-    }
+      
+      if( e.type )
+      returns.type = e.type.name;
+      
+      paramTypeMake( returns, e )
+      
+      return returns;
+    })
     
     //
     
@@ -230,7 +260,7 @@ function _templateDataMake()
     
   }
   
-  _.assert( _.strDefined( self.templateData.name ), `Entity should have name. Source structure:${_.toJs( self.structure)}` )
+  _.assert( _.strDefined( self.templateData.name ), `Entity should have name.\nType:${type}\n Source structure:${_.toJs( self.structure)}\n Source comment:${self.comment}` )
   
   self.templateData.name = removePrefix( self.templateData.name );
   
@@ -242,8 +272,15 @@ function _templateDataMake()
   { 
     let type = paramTag.type;
     
-    if( type.type === 'NameExpression' )
+    if( !_.objectIs( type ) )
     {
+      if( self.verbosity )
+      _.errLogOnce( `Failed to get type of param tag: ${_.toJs( paramTag )}. \n Comment:${self.comment}`  );
+      return;
+    }
+    
+    if( type.type === 'NameExpression' )
+    { 
       param.type = type.name;
     }
     else if( type.type === 'OptionalType' )
@@ -280,6 +317,7 @@ function _templateDataMake()
 
 let Composes =
 {
+  tags : null
 }
 
 let Associates =
@@ -314,7 +352,6 @@ let Extend =
 {
 
   _form,
-  _formTags,
   
   _typeGet,
   _orphanIs,

@@ -46,6 +46,14 @@ function form()
   self.byType.namespace = [];
   self.byType.module = [];
   self.byType.class = [];
+  
+  self.byTypeAndName.namespace = {};
+  self.byTypeAndName.module = {};
+  self.byTypeAndName.class = {};
+  
+  self.byParent.namespace = {};
+  self.byParent.module = {};
+  self.byParent.class = {};
 }
 
 //
@@ -53,13 +61,32 @@ function form()
 function addEntity( entity )
 {
   let self = this;
+  let entities = _.arrayAs( entity );
+  entities.forEach( entity => 
+  {
+    self._addEntity( entity );
+  })
+}
+
+//
+
+function _addEntity( entity )
+{
+  let self = this;
   _.assert( entity instanceof _.docgen.EntityJsdoc );
-
+  
   self.entities.push( entity );
-
+  
   let type = entity.typeGet();
   if( self.byType[ type ] )
-  self.byType[ type ].push( entity );
+  { 
+    let name = entity.tags[ type ].name;
+    if( !self.byTypeAndName[ type ][ name ] )
+    {
+      self.byType[ type ].push( entity );
+      self.byTypeAndName[ type ][ name ] = entity;
+    }
+  }
   
   if( entity.orphanIs() )
   {
@@ -84,8 +111,9 @@ function addEntity( entity )
   function addToByParent( entity, parentTag )
   { 
     let parentName = removePrefix( parentTag.name );
-    self.byParent[ parentName ] = self.byParent[ parentName ] || [];
-    self.byParent[ parentName ].push( entity )
+    let parenByKind = self.byParent[ parentTag.title ];
+    parenByKind[ parentName ] = parenByKind[ parentName ] || []
+    parenByKind[ parentName ].push( entity );
   }
   
   function removePrefix( src )
@@ -107,6 +135,7 @@ let Composes =
 {
   entities : _.define.own([]),
   byType : _.define.own({}),
+  byTypeAndName : _.define.own({}),
   byParent : _.define.own({}),
   orphans : _.define.own([]),
 }
@@ -148,6 +177,7 @@ let Extend =
   form,
 
   addEntity,
+  _addEntity,
 
   // relations
 

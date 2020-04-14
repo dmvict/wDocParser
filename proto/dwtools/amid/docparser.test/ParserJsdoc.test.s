@@ -156,6 +156,99 @@ function namespace( test )
   return ready;
 }
 
+//
+
+function routine( test )
+{
+  let a = test.assetFor( 'basic');
+
+  a.reflect();
+
+  let jsParser = new _.docgen.ParserJsdoc
+  ({
+    inPath : a.abs( 'function.js' )
+  });
+
+  jsParser.form();
+  let ready = jsParser.parse();
+
+  ready
+  .then( ( got ) =>
+  {
+    test.is( got instanceof _.docgen.Product );
+    test.identical( got.entities.length, 2 );
+    test.identical( got.orphans.length, 0 );
+    test.identical( got.byType.module.length, 0 );
+    test.identical( got.byType.namespace.length, 0 )
+    test.identical( got.byType.class.length, 0 );
+
+    return got;
+  })
+
+  .then( ( got ) =>
+  {
+    let namespace = got.entities[ 0 ];
+    var expectedStructure =
+    {
+      description : `Summary`,
+      tags :
+      [
+        { title : 'function', name : 'entityIdentical' },
+        { title : 'function', name : 'identical' },
+        { title : 'namespace', name : 'Tools' },
+        { title : 'module', name : 'Tools/base/Equaler' }
+      ]
+    }
+    let expectedPosition =
+    {
+      start : { row : 0 },
+      end : { row : 7 }
+    }
+
+    test.is( _.strDefined( namespace.comment ) );
+    test.contains( namespace.structure, expectedStructure );
+    test.identical( namespace.filePath, a.abs( 'function.js' ) );
+    test.contains( namespace.position, expectedPosition );
+
+    return got;
+  })
+  
+  //
+  
+  .then( ( got ) =>
+  {
+    let namespace = got.entities[ 1 ];
+    var expectedStructure =
+    {
+      description : `Summary`,
+      tags :
+      [
+        { title : 'function', name : 'entityIdentical' },
+        { title : 'function', name : 'identical' },
+        { title : 'namespace', name : 'Tools' },
+        { title : 'module', name : 'Tools/base/Equaler' }
+      ]
+    }
+    let expectedPosition =
+    {
+      start : { row : 0 },
+      end : { row : 7 }
+    }
+
+    test.is( _.strDefined( namespace.comment ) );
+    test.contains( namespace.structure, expectedStructure );
+    test.identical( namespace.filePath, a.abs( 'function.js' ) );
+    test.contains( namespace.position, expectedPosition );
+
+    return got;
+  })
+
+  //
+
+  return ready;
+}
+
+
 // --
 // complex
 // --
@@ -303,6 +396,7 @@ var Self =
     // basic
 
     namespace,
+    routine,
 
     //complex
 
