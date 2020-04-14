@@ -52,7 +52,7 @@ function _parse( filePath )
 
 //
 
-function _doctrineParseComment( comment )
+function _doctrineParseComment( comment,filePath )
 { 
   let self = this;
   let o = 
@@ -62,8 +62,15 @@ function _doctrineParseComment( comment )
     sloppy : true,
     range : true
   }
-  let structure = doctrine.parse( doctrine.unwrapComment( comment.text ), o );
-  return structure;
+  try
+  {
+    return doctrine.parse( doctrine.unwrapComment( comment.text ), o );
+  }
+  catch( err )
+  { 
+    if( self.vebosity )
+    throw _.err( `Failed to parse comment:${comment.text}\nFile:${filePath}\nRow:${comment.startPosition.row}\nReason:`, err )
+  }
 }
 
 //
@@ -72,7 +79,12 @@ function _commentHandle( comment, filePath )
 {
   let self = this;
   
-  let structure = self._doctrineParseComment( comment );
+  let structure = self._doctrineParseComment( comment,filePath );
+  
+  if( !structure )
+  return;
+  if( !structure.tags.length )
+  return;
   
   let entity = self._makeSeveralMaybe( structure, comment, filePath );
   self.product.addEntity( entity );
@@ -104,11 +116,21 @@ function _tagsToMap( structure )
 
 function _typeTagNameGet( tags )
 {
+  
+  if( tags.typedef )
+  return 'typedef';
+  
+  if( tags.constructor )
+  return 'constructor';
+  
   if( tags.function )
   return 'function';
 
   if( tags.method )
   return 'method';
+  
+  if( tags.callback )
+  return 'callback';
   
   if( tags.class )
   return 'class';

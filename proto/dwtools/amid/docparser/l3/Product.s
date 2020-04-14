@@ -46,6 +46,10 @@ function form()
   self.byType.namespace = [];
   self.byType.module = [];
   self.byType.class = [];
+  
+  self.byParent.namespace = {};
+  self.byParent.module = {};
+  self.byParent.class = {};
 }
 
 //
@@ -96,8 +100,9 @@ function _addEntity( entity )
   function addToByParent( entity, parentTag )
   { 
     let parentName = removePrefix( parentTag.name );
-    self.byParent[ parentName ] = self.byParent[ parentName ] || [];
-    self.byParent[ parentName ].push( entity )
+    let parenByKind = self.byParent[ parentTag.title ];
+    parenByKind[ parentName ] = parenByKind[ parentName ] || []
+    parenByKind[ parentName ].push( entity );
   }
   
   function removePrefix( src )

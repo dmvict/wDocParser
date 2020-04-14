@@ -35,8 +35,17 @@ function _form()
 function _typeGet()
 {
   let self = this;
+  
+  if( self.tags.typedef )
+  return 'typedef'
+  
+  if( self.tags.callback )
+  return 'callback'
+  
+  if( self.tags.constructor )
+  return 'constructor';
 
-  if( self.tags.function || self.tags.method )
+  if( self.tags.function || self.tags.method || self.tags.callback )
   return 'function';
 
   if( self.tags.class )
@@ -91,14 +100,15 @@ function _templateDataMake()
   if( description )
   {
     description = _.strLinesStrip( description );
-    let lines = _.strLinesSplit( description );
-    td.summary = lines.shift();
-    td.description = lines.join('\n');
+    // let lines = _.strLinesSplit( description );
+    // td.summary = lines.shift();
+    // td.description = lines.join('\n');
+    td.description = description;
   }
   if( tags.summary )
   { 
-    td.summary = td.summary ? td.summary + '\n' : '';
-    td.summary += tags.summary.description; 
+    // td.summary = td.summary ? td.summary + '\n' : '';
+    td.summary = tags.summary.description; 
   }
   if( tags.description )
   {
@@ -107,7 +117,7 @@ function _templateDataMake()
   }
   
   if( tags[ type ] )
-  td.name = tags[ type ].name,
+  td.name = tags[ type ].name || tags[ type ].description; //callback tags stores it name in description
   td.kind = type;
   
   if( type === 'module' )
@@ -117,12 +127,15 @@ function _templateDataMake()
   else if( type === 'namespace' )
   {
     td.namespace = tags.namespace.name;
+    if( tags.module )
     td.module = tags.module.name;
   }
   else if( type === 'class' )
   { 
     td.class = tags.class.name;
+    if( tags.namespace )
     td.namespace = tags.namespace.name;
+    if( tags.module )
     td.module = tags.module.name;
     
     if( tags.classdesc )
@@ -130,6 +143,29 @@ function _templateDataMake()
       td.description = td.description ? td.description + '\n' : '';
       td.description += tags.classdesc.description; 
     }
+  }
+  else if( type === 'typedef' )
+  {
+    td.name = tags.typedef.name
+    paramTypeMake( td, tags.typedef )
+    
+    if( tags.property )
+    td.properties = _.arrayAs( tags.property ).map( ( e ) => 
+    { 
+      let property = 
+      { 
+        name : e.name, 
+        description : e.description, 
+        optional : false
+      } 
+      
+      if( e.default )
+      property.default = e.default;
+      
+      paramTypeMake( property, e )
+      
+      return property;
+    })
   }
   else
   { 
@@ -212,7 +248,7 @@ function _templateDataMake()
     
   }
   
-  _.assert( _.strDefined( self.templateData.name ), `Entity should have name. Source structure:${_.toJs( self.structure)}` )
+  _.assert( _.strDefined( self.templateData.name ), `Entity should have name.\nType:${type}\n Source structure:${_.toJs( self.structure)}` )
   
   self.templateData.name = removePrefix( self.templateData.name );
   

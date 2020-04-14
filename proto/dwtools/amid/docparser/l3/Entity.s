@@ -131,6 +131,16 @@ let FunctionEntity =
   module : null
 }
 
+let TypedefEntity =
+{
+  properties : null,
+  type : null,
+  
+  class : null,
+  namespace : null,
+  module : null
+}
+
 let EntityPropertiesByType = 
 {
   base : BaseEntity,
@@ -138,7 +148,10 @@ let EntityPropertiesByType =
  
   namespace : NamespaceEntity,
   class : ClassEntity,
-  function : FunctionEntity
+  function : FunctionEntity,
+  constructor : FunctionEntity,
+  callback : FunctionEntity,
+  typedef : TypedefEntity
 }
 
 // --
