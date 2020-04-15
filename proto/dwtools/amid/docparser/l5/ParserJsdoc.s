@@ -134,7 +134,7 @@ function _typeTagNameGet( tags )
 {
   
   if( tags.routine )
-  return 'routine';
+  return 'static routine';
   
   if( tags.typedef )
   return 'typedef';

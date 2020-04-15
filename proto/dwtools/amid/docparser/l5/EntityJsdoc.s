@@ -178,7 +178,7 @@ function _templateDataMake()
     else if( tags.routine )
     { 
       td.name = tags.routine.description;
-      td.kind = 'routine'
+      td.kind = 'static routine'
     }
     else if( tags.class && tags.function && !tags.static )
     {
@@ -187,7 +187,7 @@ function _templateDataMake()
     
     if( type === 'function' )
     if( tags.static || !tags.class && tags.namespace )
-    td.kind = 'routine';
+    td.kind = 'static routine';
     
     //
     
