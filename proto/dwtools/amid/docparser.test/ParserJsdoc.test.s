@@ -248,6 +248,579 @@ function routine( test )
   return ready;
 }
 
+//
+
+function paramGoodRaw( test )
+{
+  let a = test.assetFor( 'basic');
+
+  a.reflect();
+
+  let jsParser = new _.docgen.ParserJsdoc
+  ({
+    inPath : a.abs( 'param/paramGood.js' )
+  });
+
+  jsParser.form();
+  let ready = jsParser.parse();
+
+  ready
+  .then( ( got ) =>
+  {
+    test.is( got instanceof _.docgen.Product );
+    test.identical( got.entities.length, 2 );
+    test.identical( got.orphans.length, 0 );
+    test.identical( got.byType.module.length, 0 );
+    test.identical( got.byType.namespace.length, 0 )
+    test.identical( got.byType.class.length, 0 );
+
+    return got;
+  })
+
+  .then( ( got ) =>
+  {
+    let entity = got.entities[ 0 ];
+    
+    let expectedParams = 
+    [
+      {
+        "title" : `param`, 
+        "description" : null, 
+        "type" : null, 
+        "name" : `argument`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description`, 
+        "type" : null, 
+        "name" : `argument`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description no dash`, 
+        "type" : null, 
+        "name" : `argument`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description`, 
+        "type" : 
+        {
+          "type" : `NameExpression`, 
+          "name" : `Object`, 
+        }, 
+        "name" : `options`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description without dash`, 
+        "type" : 
+        {
+          "type" : `NameExpression`, 
+          "name" : `Object`, 
+        }, 
+        "name" : `options`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description`, 
+        "type" : 
+        {
+          "type" : `NameExpression`, 
+          "name" : `Object`, 
+        }, 
+        "name" : `options.property`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description without dash`, 
+        "type" : 
+        {
+          "type" : `NameExpression`, 
+          "name" : `Object`, 
+        }, 
+        "name" : `options.property`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description`, 
+        "type" : 
+        {
+          "type" : `OptionalType`, 
+          "expression" : 
+          {
+            "type" : `TypeApplication`, 
+            "expression" : 
+            {
+              "type" : `NameExpression`, 
+              "name" : `Array`, 
+            }, 
+            "applications" : 
+            [
+              {
+                "type" : `NameExpression`, 
+                "name" : `String`, 
+              }
+            ], 
+          }
+        }, 
+        "name" : `options.array`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description without dash`, 
+        "type" : 
+        {
+          "type" : `OptionalType`, 
+          "expression" : 
+          {
+            "type" : `TypeApplication`, 
+            "expression" : 
+            {
+              "type" : `NameExpression`, 
+              "name" : `Array`, 
+            }, 
+            "applications" : 
+            [
+              {
+                "type" : `NameExpression`, 
+                "name" : `String`, 
+              }
+            ], 
+          }
+        }, 
+        "name" : `options.array`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description`, 
+        "type" : 
+        {
+          "type" : `OptionalType`, 
+          "expression" : 
+          {
+            "type" : `NameExpression`, 
+            "name" : `Boolean`, 
+          }
+        }, 
+        "name" : `options.allowSomething`, 
+        "default" : `true`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description without dash`, 
+        "type" : 
+        {
+          "type" : `OptionalType`, 
+          "expression" : 
+          {
+            "type" : `NameExpression`, 
+            "name" : `Boolean`, 
+          }
+        }, 
+        "name" : `options.allowSomething`, 
+        "default" : `true`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description without dash`, 
+        "type" : 
+        {
+          "type" : `TypeApplication`, 
+          "expression" : 
+          {
+            "type" : `NameExpression`, 
+            "name" : `Array`, 
+          }, 
+          "applications" : 
+          [
+            {
+              "type" : `NameExpression`, 
+              "name" : `Object`, 
+            }
+          ], 
+        }, 
+        "name" : `objects`
+      }, 
+      {
+        "title" : `param`, 
+        "description" : `Description`, 
+        "type" : 
+        {
+          "type" : `NameExpression`, 
+          "name" : `String`, 
+        }, 
+        "name" : `objects[].name`
+      }
+    ]
+    
+    let expectedFunction =
+    {
+      "title" : `function`, 
+      "description" : null, 
+      "name" : `paramTest`
+    }
+    
+    let expectedNamespace = 
+    {
+      "title" : `namespace`, 
+      "description" : null, 
+      "type" : null, 
+      "name" : `testSpace`
+    }
+    
+    let expectedTags = 
+    {
+      param : expectedParams,
+      function : expectedFunction,
+      namespace : expectedNamespace
+    }
+
+    test.contains( entity.tags, expectedTags );
+
+    return got;
+  })
+  
+  //
+  
+  .then( ( got ) =>
+  {
+    let entity = got.entities[ 1 ];
+    debugger
+    let expectedParams = 
+    {
+      "title" : `param`, 
+      "description" : null, 
+      "type" : 
+      {
+        "type" : `RestType`, 
+        "expression" : 
+        {
+          "type" : `NameExpression`, 
+          "name" : `Number`, 
+        }, 
+      }, 
+      "name" : `argument`
+    }
+    
+    let expectedFunction =
+    {
+      "title" : `function`, 
+      "description" : null, 
+      "name" : `paramTest`
+    }
+    
+    let expectedNamespace = 
+    {
+      "title" : `namespace`, 
+      "description" : null, 
+      "type" : null, 
+      "name" : `testSpace`
+    }
+    
+    let expectedTags = 
+    {
+      param : expectedParams,
+      function : expectedFunction,
+      namespace : expectedNamespace
+    }
+
+    test.contains( entity.tags, expectedTags );
+
+    return got;
+  })
+  
+  //
+  
+  return ready;
+}
+
+//
+
+function paramBadRaw( test )
+{
+  let a = test.assetFor( 'basic');
+
+  a.reflect();
+
+  let jsParser = new _.docgen.ParserJsdoc
+  ({
+    inPath : a.abs( 'param/paramBad.js' )
+  });
+
+  jsParser.form();
+  let ready = jsParser.parse();
+
+  ready
+  .then( ( got ) =>
+  {
+    test.is( got instanceof _.docgen.Product );
+    test.identical( got.entities.length, 1 );
+    test.identical( got.orphans.length, 0 );
+    test.identical( got.byType.module.length, 0 );
+    test.identical( got.byType.namespace.length, 0 )
+    test.identical( got.byType.class.length, 0 );
+
+    return got;
+  })
+
+  .then( ( got ) =>
+  {
+    let entity = got.entities[ 0 ];
+    
+    let expectedParams = 
+    {
+      'title' : 'param', 
+      'description' : null, 
+      'type' : null, 
+      'name' : 'argument'
+    }
+    
+    let expectedFunction =
+    {
+      "title" : `function`, 
+      "description" : null, 
+      "name" : `paramTest`
+    }
+    
+    let expectedNamespace = 
+    {
+      "title" : `namespace`, 
+      "description" : null, 
+      "type" : null, 
+      "name" : `testSpace`
+    }
+    
+    let expectedTags = 
+    {
+      param : expectedParams,
+      function : expectedFunction,
+      namespace : expectedNamespace
+    }
+
+    test.contains( entity.tags, expectedTags );
+
+    return got;
+  })
+  
+  //
+  
+  return ready;
+}
+
+//
+
+function paramGoodTemplateData( test )
+{
+  let a = test.assetFor( 'basic');
+
+  a.reflect();
+
+  let jsParser = new _.docgen.ParserJsdoc
+  ({
+    inPath : a.abs( 'param/paramGood.js' )
+  });
+
+  jsParser.form();
+  let ready = jsParser.parse();
+
+  ready
+  .then( ( got ) =>
+  {
+    test.is( got instanceof _.docgen.Product );
+    test.identical( got.entities.length, 2 );
+    test.identical( got.orphans.length, 0 );
+    test.identical( got.byType.module.length, 0 );
+    test.identical( got.byType.namespace.length, 0 )
+    test.identical( got.byType.class.length, 0 );
+
+    return got;
+  })
+
+  .then( ( got ) =>
+  {
+    let entity = got.entities[ 0 ];
+    
+    let expectedParams = 
+    [
+      { "name" : `argument`, "description" : null, "optional" : false }, 
+      { "name" : `argument`, "description" : `Description`, "optional" : false }, 
+      { "name" : `argument`, "description" : `Description no dash`, "optional" : false }, 
+      {
+        "name" : `options`, 
+        "description" : `Description`, 
+        "optional" : false, 
+        "type" : `Object`
+      }, 
+      {
+        "name" : `options`, 
+        "description" : `Description without dash`, 
+        "optional" : false, 
+        "type" : `Object`
+      }, 
+      {
+        "name" : `options.property`, 
+        "description" : `Description`, 
+        "optional" : false, 
+        "type" : `Object`
+      }, 
+      {
+        "name" : `options.property`, 
+        "description" : `Description without dash`, 
+        "optional" : false, 
+        "type" : `Object`
+      }, 
+      { 
+        "name" : `options.array`, 
+        "description" : `Description`,
+        "optional" : true,
+        "type" : `String[]` 
+      }, 
+      { 
+        "name" : `options.array`, 
+        "description" : `Description without dash`,
+        "optional" : true,
+        "type" : `String[]` 
+      }, 
+      {
+        "name" : `options.allowSomething`, 
+        "description" : `Description`, 
+        "optional" : true, 
+        "default" : `true`, 
+        "type" : `Boolean`
+      }, 
+      {
+        "name" : `options.allowSomething`, 
+        "description" : `Description without dash`, 
+        "optional" : true, 
+        "default" : `true`, 
+        "type" : `Boolean`
+      }, 
+      { 
+        "name" : `objects`, 
+        "description" : `Description without dash`,
+        "optional" : false,
+        "type" : `Object[]`
+      }, 
+      {
+        "name" : `objects[].name`, 
+        "description" : `Description`, 
+        "optional" : false, 
+        "type" : `String`
+      }
+    ] 
+      
+    let expectedTemplateData = 
+    {
+      name: "paramTest",
+      namespace: "testSpace",
+      params : expectedParams
+    }
+    
+    let templateData = entity.templateDataMake();
+    
+    test.contains( templateData, expectedTemplateData );
+
+    return got;
+  })
+  
+  //
+  
+  .then( ( got ) =>
+  {
+    let entity = got.entities[ 1 ];
+    
+    let expectedParams = 
+    [
+      { 
+        "name" : `argument`, 
+        "description" : null, 
+        "optional" : false,
+        "type" : `...Number`
+      }
+    ] 
+      
+    let expectedTemplateData = 
+    {
+      name: "paramTest",
+      namespace: "testSpace",
+      params : expectedParams
+    }
+    
+    let templateData = entity.templateDataMake();
+    
+    test.contains( templateData, expectedTemplateData );
+
+    return got;
+  })
+  
+  //
+  
+  return ready;
+}
+
+//
+
+function paramBadTemplateData( test )
+{
+  let a = test.assetFor( 'basic');
+
+  a.reflect();
+
+  let jsParser = new _.docgen.ParserJsdoc
+  ({
+    inPath : a.abs( 'param/paramBad.js' )
+  });
+
+  jsParser.form();
+  let ready = jsParser.parse();
+
+  ready
+  .then( ( got ) =>
+  {
+    test.is( got instanceof _.docgen.Product );
+    test.identical( got.entities.length, 1 );
+    test.identical( got.orphans.length, 0 );
+    test.identical( got.byType.module.length, 0 );
+    test.identical( got.byType.namespace.length, 0 )
+    test.identical( got.byType.class.length, 0 );
+
+    return got;
+  })
+
+  //
+  
+  .then( ( got ) =>
+  {
+    let entity = got.entities[ 0 ];
+    
+    let expectedParams = 
+    [
+      { 
+        "description": null,
+        "name": "argument",
+        "optional": false
+      }
+    ] 
+      
+    let expectedTemplateData = 
+    {
+      name: "paramTest",
+      namespace: "testSpace",
+      params : expectedParams
+    }
+    
+    let templateData = entity.templateDataMake();
+    
+    test.contains( templateData, expectedTemplateData );
+
+    return got;
+  })
+  
+  //
+  
+  return ready;
+}
 
 // --
 // complex
@@ -397,6 +970,12 @@ var Self =
 
     namespace,
     routine,
+    
+    paramGoodRaw,
+    paramBadRaw,
+    
+    paramGoodTemplateData,
+    paramBadTemplateData,
 
     //complex
 
