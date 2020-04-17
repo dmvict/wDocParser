@@ -204,7 +204,11 @@ function _templateDataMake()
       if( e.default )
       param.default = e.default;
       
-      paramTypeMake( param, e )
+      paramTypeMake( param, e );
+      
+      //workaround for "@param { type } - description" -> null-null
+      if( param.name === 'null-null' ) 
+      param.name = null;
       
       return param;
     })
