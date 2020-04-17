@@ -268,9 +268,12 @@ function _templateDataMake()
   
   /*  */
   
-  function paramTypeMake( param, paramTag )
+  function paramTypeMake( param, paramTag, postfix )
   { 
     let type = paramTag.type;
+    
+    if( arguments.length === 2 )
+    postfix = '';
     
     if( !_.objectIs( type ) )
     {
@@ -281,7 +284,7 @@ function _templateDataMake()
     
     if( type.type === 'NameExpression' )
     { 
-      param.type = type.name;
+      param.type = type.name + postfix;
     }
     else if( type.type === 'OptionalType' )
     {
@@ -294,7 +297,23 @@ function _templateDataMake()
     }
     else if( type.type === 'AllLiteral' )
     {
-      param.type = '*'
+      param.type = '*' + postfix
+    }
+    else if( type.type === 'TypeApplication' )
+    {
+      paramTypeMake( param, { type : type.expression } );
+      param.type = type.applications.map( ( t ) => 
+      {
+        let current = Object.create( null );
+        paramTypeMake( current, { type : t }, '[]' );
+        return current.type;
+      })
+      param.type = param.type.join( '|' );
+    }
+    else if( type.type === 'RestType' )
+    {
+      paramTypeMake( param, { type : type.expression } );
+      param.type = '...' + param.type;
     }
   }
   
