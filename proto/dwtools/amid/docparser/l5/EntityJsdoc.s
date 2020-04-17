@@ -122,21 +122,21 @@ function _templateDataMake()
   
   if( type === 'module' )
   {
-    td.module = tags.module.name;
+    td.module = unprefix( tags.module.name );
   }
   else if( type === 'namespace' )
   {
-    td.namespace = tags.namespace.name;
+    td.namespace = unprefix( tags.namespace.name );
     if( tags.module )
-    td.module = tags.module.name;
+    td.module = unprefix( tags.module.name );
   }
   else if( type === 'class' )
   { 
-    td.class = tags.class.name;
+    td.class = unprefix( tags.class.name );
     if( tags.namespace )
-    td.namespace = tags.namespace.name;
+    td.namespace = unprefix( tags.namespace.name );
     if( tags.module )
-    td.module = tags.module.name;
+    td.module = unprefix( tags.module.name );
     
     if( tags.classdesc )
     {
@@ -250,19 +250,19 @@ function _templateDataMake()
     //
     
     if( tags.class )
-    td.class = tags.class.name;
+    td.class = unprefix( tags.class.name );
     
     if( tags.namespace )
-    td.namespace = tags.namespace.name;
+    td.namespace = unprefix( tags.namespace.name );
     
     if( tags.module )
-    td.module = tags.module.name;
+    td.module = unprefix( tags.module.name );
     
   }
   
   _.assert( _.strDefined( self.templateData.name ), `Entity should have name.\nType:${type}\n Source structure:${_.toJs( self.structure)}\n Source comment:${self.comment}` )
   
-  self.templateData.name = removePrefix( self.templateData.name );
+  self.templateData.name = unprefix( self.templateData.name );
   
   return self.templateData;
   
@@ -298,7 +298,7 @@ function _templateDataMake()
     }
   }
   
-  function removePrefix( src )
+  function unprefix( src )
   {
     let firstIsSmall = /[a-z]/.test( src[ 0 ] );
     let secondIsCapital = /[A-Z]/.test( src[ 1 ] );
