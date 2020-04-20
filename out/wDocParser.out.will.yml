@@ -176,6 +176,9 @@ module:
           - ../proto/dwtools/amid/docparser.test/_asset/basic/function.js
           - ../proto/dwtools/amid/docparser.test/_asset/basic/module.js
           - ../proto/dwtools/amid/docparser.test/_asset/basic/namespace.js
+          - ../proto/dwtools/amid/docparser.test/_asset/basic/param
+          - ../proto/dwtools/amid/docparser.test/_asset/basic/param/paramBad.js
+          - ../proto/dwtools/amid/docparser.test/_asset/basic/param/paramGood.js
           - ../proto/dwtools/amid/docparser.test/_asset/complexDoclet
           - ../proto/dwtools/amid/docparser.test/_asset/complexDoclet/complex.js
           - ../proto/dwtools/atop
