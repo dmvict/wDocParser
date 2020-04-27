@@ -1,33 +1,33 @@
 {
-  "name" : "wdocparser", 
-  "version" : "0.3.21", 
-  "description" : "Module for parsing documentation inlined into source code.", 
-  "author" : "Kostiantyn Wandalen <wanalen@willbe.so>", 
-  "license" : "MIT", 
-  "main" : "proto/dwtools/amid/docparser/Include.s", 
-  "files" : [ "proto/dwtools/amid/docparser", "proto/dwtools/Tools.s" ], 
-  "scripts" : { "test" : "wtest .run proto", "docgen" : "wdocgen .build proto" }, 
-  "repository" : 
+  "name" : "wdocparser",
+  "version" : "0.3.22",
+  "description" : "Module for parsing documentation inlined into source code.",
+  "author" : "Kostiantyn Wandalen <wanalen@willbe.so>",
+  "license" : "MIT",
+  "main" : "proto/dwtools/amid/docparser/Include.s",
+  "files" : [ "proto/dwtools/amid/docparser", "proto/dwtools/Tools.s" ],
+  "scripts" : { "test" : "wtest .run proto", "docgen" : "wdocgen .build proto" },
+  "repository" :
   {
-    "type" : "git", 
+    "type" : "git",
     "url" : "https ://github.com/Wandalen/wDocParser.git"
-  }, 
-  "bugs" : 
+  },
+  "bugs" :
   {
     "url" : "https ://github.com/Wandalen/wDocParser/issues"
-  }, 
-  "dependencies" : 
+  },
+  "dependencies" :
   {
-    "wTools" : "", 
-    "wFiles" : "", 
-    "wCopyable" : "", 
-    "wConsequence" : "", 
-    "wlooker" : "", 
-    "wlookerextra" : "", 
-    "wschema" : "", 
-    "wintrospector" : "", 
+    "wTools" : "",
+    "wFiles" : "",
+    "wCopyable" : "",
+    "wConsequence" : "",
+    "wlooker" : "",
+    "wlookerextra" : "",
+    "wschema" : "",
+    "wintrospector" : "",
     "doctrine" : ""
-  }, 
-  "devDependencies" : { "wTesting" : "", "wdocparser" : "file:." }, 
+  },
+  "devDependencies" : { "wTesting" : "", "wdocparser" : "file:." },
   "keywords" : [ "wTools" ]
 }
