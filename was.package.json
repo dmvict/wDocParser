@@ -2,7 +2,7 @@
   "name" : "wdocparser",
   "version" : "0.3.33",
   "description" : "Module for parsing documentation inlined into source code.",
-  "author" : "Kostiantyn Wandalen <wanalen@willbe.so>",
+  "author" : "Kostiantyn Wandalen <wanalen@01.school>",
   "license" : "MIT",
   "main" : "proto/dwtools/amid/docparser/Include.s",
   "files" : [ "proto/dwtools/amid/docparser", "proto/dwtools/Tools.s" ],
