@@ -22,7 +22,7 @@ function onSuiteBegin()
   let self = this;
   let path = _.fileProvider.path;
 
-  self.suiteTempPath = path.pathDirTempOpen( path.join( __dirname, '../..'  ), 'err' );
+  self.suiteTempPath = path.tempOpen( path.join( __dirname, '../..'  ), 'err' );
   self.assetsOriginalSuitePath = path.join( __dirname, '_asset' );
 
 }
@@ -34,7 +34,7 @@ function onSuiteEnd()
   let self = this;
   let path = _.fileProvider.path;
   _.assert( _.strHas( self.suiteTempPath, '/err-' ) )
-  path.pathDirTempClose( self.suiteTempPath );
+  path.tempClose( self.suiteTempPath );
 }
 
 // --
