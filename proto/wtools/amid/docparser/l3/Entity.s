@@ -32,7 +32,7 @@ function init( o )
   _.assert( _.strIs( self.comment ) );
   _.assert( _.strIs( self.filePath ) );
   _.assert( _.objectIs( self.position ) );
-  
+
 
 }
 
@@ -49,7 +49,7 @@ function form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
-  
+
   return self._form();
 }
 
@@ -75,25 +75,25 @@ function templateDataMake()
 {
   let self = this;
   let type = self.typeGet();
-  
+
   if( _.objectIs( self.templateData ) )
   return self.templateData;
-  
+
   let base = EntityPropertiesByType.base;
   let fields = EntityPropertiesByType[ type ];
-  
+
   _.assert( _.objectIs( fields ) );
-  
+
   self.templateData = _.mapExtend( null, base, fields );
-  
+
   self._templateDataMake();
-  
+
   return self.templateData;
 }
 
 //
 
-let BaseEntity = 
+let BaseEntity =
 {
   name : null,
   summary : null,
@@ -101,31 +101,31 @@ let BaseEntity =
   kind : null
 }
 
-let ModuleEntity = 
+let ModuleEntity =
 {
   module : null
 }
 
-let NamespaceEntity = 
+let NamespaceEntity =
 {
   namespace : null,
   module : null
 }
 
-let ClassEntity = 
+let ClassEntity =
 {
   class : null,
   namespace : null,
   module : null
 }
 
-let FunctionEntity = 
+let FunctionEntity =
 {
   params : null,
   examples : null,
   returns : null,
   throws : null,
-  
+
   class : null,
   namespace : null,
   module : null
@@ -135,17 +135,17 @@ let TypedefEntity =
 {
   properties : null,
   type : null,
-  
+
   class : null,
   namespace : null,
   module : null
 }
 
-let EntityPropertiesByType = 
+let EntityPropertiesByType =
 {
   base : BaseEntity,
   module : ModuleEntity,
- 
+
   namespace : NamespaceEntity,
   class : ClassEntity,
   function : FunctionEntity,
@@ -204,16 +204,16 @@ let Extend =
 
   _form : null,
   form,
-  
+
   _typeGet : null,
   typeGet,
-  
+
   _orphanIs : null,
   orphanIs,
-  
+
   _templateDataMake : null,
   templateDataMake,
-  
+
   // relations
 
   Composes,

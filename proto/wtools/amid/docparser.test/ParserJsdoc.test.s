@@ -6,7 +6,7 @@ if( typeof module !== 'undefined' ) {
 
   let _ = require( '../../Tools.s' );
   _.include( 'wTesting' );
-  
+
   require( '../docparser/Include.s' );
 
 }
@@ -93,7 +93,7 @@ function namespace( test )
     return got;
   })
 
-  //
+  /* */
 
   .then( ( got ) =>
   {
@@ -121,7 +121,7 @@ function namespace( test )
     return got;
   })
 
-  //
+  /* */
 
   .then( ( got ) =>
   {
@@ -151,7 +151,7 @@ function namespace( test )
     return got;
   })
 
-  //
+  /* */
 
   return ready;
 }
@@ -212,9 +212,9 @@ function routine( test )
 
     return got;
   })
-  
-  //
-  
+
+  /* */
+
   .then( ( got ) =>
   {
     let namespace = got.entities[ 1 ];
@@ -243,7 +243,7 @@ function routine( test )
     return got;
   })
 
-  //
+  /* */
 
   return ready;
 }
@@ -280,196 +280,196 @@ function paramGoodRaw( test )
   .then( ( got ) =>
   {
     let entity = got.entities[ 0 ];
-    
-    let expectedParams = 
+
+    let expectedParams =
     [
       {
-        "title" : `param`, 
-        "description" : null, 
-        "type" : null, 
+        "title" : `param`,
+        "description" : null,
+        "type" : null,
         "name" : `argument`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description`, 
-        "type" : null, 
+        "title" : `param`,
+        "description" : `Description`,
+        "type" : null,
         "name" : `argument`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description no dash`, 
-        "type" : null, 
+        "title" : `param`,
+        "description" : `Description no dash`,
+        "type" : null,
         "name" : `argument`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description`,
+        "type" :
         {
-          "type" : `NameExpression`, 
-          "name" : `Object`, 
-        }, 
+          "type" : `NameExpression`,
+          "name" : `Object`,
+        },
         "name" : `options`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description without dash`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description without dash`,
+        "type" :
         {
-          "type" : `NameExpression`, 
-          "name" : `Object`, 
-        }, 
+          "type" : `NameExpression`,
+          "name" : `Object`,
+        },
         "name" : `options`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description`,
+        "type" :
         {
-          "type" : `NameExpression`, 
-          "name" : `Object`, 
-        }, 
+          "type" : `NameExpression`,
+          "name" : `Object`,
+        },
         "name" : `options.property`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description without dash`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description without dash`,
+        "type" :
         {
-          "type" : `NameExpression`, 
-          "name" : `Object`, 
-        }, 
+          "type" : `NameExpression`,
+          "name" : `Object`,
+        },
         "name" : `options.property`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description`,
+        "type" :
         {
-          "type" : `OptionalType`, 
-          "expression" : 
+          "type" : `OptionalType`,
+          "expression" :
           {
-            "type" : `TypeApplication`, 
-            "expression" : 
+            "type" : `TypeApplication`,
+            "expression" :
             {
-              "type" : `NameExpression`, 
-              "name" : `Array`, 
-            }, 
-            "applications" : 
+              "type" : `NameExpression`,
+              "name" : `Array`,
+            },
+            "applications" :
             [
               {
-                "type" : `NameExpression`, 
-                "name" : `String`, 
+                "type" : `NameExpression`,
+                "name" : `String`,
               }
-            ], 
+            ],
           }
-        }, 
+        },
         "name" : `options.array`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description without dash`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description without dash`,
+        "type" :
         {
-          "type" : `OptionalType`, 
-          "expression" : 
+          "type" : `OptionalType`,
+          "expression" :
           {
-            "type" : `TypeApplication`, 
-            "expression" : 
+            "type" : `TypeApplication`,
+            "expression" :
             {
-              "type" : `NameExpression`, 
-              "name" : `Array`, 
-            }, 
-            "applications" : 
+              "type" : `NameExpression`,
+              "name" : `Array`,
+            },
+            "applications" :
             [
               {
-                "type" : `NameExpression`, 
-                "name" : `String`, 
+                "type" : `NameExpression`,
+                "name" : `String`,
               }
-            ], 
+            ],
           }
-        }, 
+        },
         "name" : `options.array`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description`,
+        "type" :
         {
-          "type" : `OptionalType`, 
-          "expression" : 
+          "type" : `OptionalType`,
+          "expression" :
           {
-            "type" : `NameExpression`, 
-            "name" : `Boolean`, 
+            "type" : `NameExpression`,
+            "name" : `Boolean`,
           }
-        }, 
-        "name" : `options.allowSomething`, 
+        },
+        "name" : `options.allowSomething`,
         "default" : `true`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description without dash`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description without dash`,
+        "type" :
         {
-          "type" : `OptionalType`, 
-          "expression" : 
+          "type" : `OptionalType`,
+          "expression" :
           {
-            "type" : `NameExpression`, 
-            "name" : `Boolean`, 
+            "type" : `NameExpression`,
+            "name" : `Boolean`,
           }
-        }, 
-        "name" : `options.allowSomething`, 
+        },
+        "name" : `options.allowSomething`,
         "default" : `true`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description without dash`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description without dash`,
+        "type" :
         {
-          "type" : `TypeApplication`, 
-          "expression" : 
+          "type" : `TypeApplication`,
+          "expression" :
           {
-            "type" : `NameExpression`, 
-            "name" : `Array`, 
-          }, 
-          "applications" : 
+            "type" : `NameExpression`,
+            "name" : `Array`,
+          },
+          "applications" :
           [
             {
-              "type" : `NameExpression`, 
-              "name" : `Object`, 
+              "type" : `NameExpression`,
+              "name" : `Object`,
             }
-          ], 
-        }, 
+          ],
+        },
         "name" : `objects`
-      }, 
+      },
       {
-        "title" : `param`, 
-        "description" : `Description`, 
-        "type" : 
+        "title" : `param`,
+        "description" : `Description`,
+        "type" :
         {
-          "type" : `NameExpression`, 
-          "name" : `String`, 
-        }, 
+          "type" : `NameExpression`,
+          "name" : `String`,
+        },
         "name" : `objects[].name`
       }
     ]
-    
+
     let expectedFunction =
     {
-      "title" : `function`, 
-      "description" : null, 
+      "title" : `function`,
+      "description" : null,
       "name" : `paramTest`
     }
-    
-    let expectedNamespace = 
+
+    let expectedNamespace =
     {
-      "title" : `namespace`, 
-      "description" : null, 
-      "type" : null, 
+      "title" : `namespace`,
+      "description" : null,
+      "type" : null,
       "name" : `testSpace`
     }
-    
-    let expectedTags = 
+
+    let expectedTags =
     {
       param : expectedParams,
       function : expectedFunction,
@@ -480,45 +480,45 @@ function paramGoodRaw( test )
 
     return got;
   })
-  
-  //
-  
+
+  /* */
+
   .then( ( got ) =>
   {
     let entity = got.entities[ 1 ];
     debugger
-    let expectedParams = 
+    let expectedParams =
     {
-      "title" : `param`, 
-      "description" : null, 
-      "type" : 
+      "title" : `param`,
+      "description" : null,
+      "type" :
       {
-        "type" : `RestType`, 
-        "expression" : 
+        "type" : `RestType`,
+        "expression" :
         {
-          "type" : `NameExpression`, 
-          "name" : `Number`, 
-        }, 
-      }, 
+          "type" : `NameExpression`,
+          "name" : `Number`,
+        },
+      },
       "name" : `argument`
     }
-    
+
     let expectedFunction =
     {
-      "title" : `function`, 
-      "description" : null, 
+      "title" : `function`,
+      "description" : null,
       "name" : `paramTest`
     }
-    
-    let expectedNamespace = 
+
+    let expectedNamespace =
     {
-      "title" : `namespace`, 
-      "description" : null, 
-      "type" : null, 
+      "title" : `namespace`,
+      "description" : null,
+      "type" : null,
       "name" : `testSpace`
     }
-    
-    let expectedTags = 
+
+    let expectedTags =
     {
       param : expectedParams,
       function : expectedFunction,
@@ -529,9 +529,9 @@ function paramGoodRaw( test )
 
     return got;
   })
-  
-  //
-  
+
+  /* */
+
   return ready;
 }
 
@@ -567,31 +567,31 @@ function paramBadRaw( test )
   .then( ( got ) =>
   {
     let entity = got.entities[ 0 ];
-    
-    let expectedParams = 
+
+    let expectedParams =
     {
-      'title' : 'param', 
-      'description' : null, 
-      'type' : null, 
+      'title' : 'param',
+      'description' : null,
+      'type' : null,
       'name' : 'argument'
     }
-    
+
     let expectedFunction =
     {
-      "title" : `function`, 
-      "description" : null, 
+      "title" : `function`,
+      "description" : null,
       "name" : `paramTest`
     }
-    
-    let expectedNamespace = 
+
+    let expectedNamespace =
     {
-      "title" : `namespace`, 
-      "description" : null, 
-      "type" : null, 
+      "title" : `namespace`,
+      "description" : null,
+      "type" : null,
       "name" : `testSpace`
     }
-    
-    let expectedTags = 
+
+    let expectedTags =
     {
       param : expectedParams,
       function : expectedFunction,
@@ -602,9 +602,9 @@ function paramBadRaw( test )
 
     return got;
   })
-  
-  //
-  
+
+  /* */
+
   return ready;
 }
 
@@ -640,122 +640,122 @@ function paramGoodTemplateData( test )
   .then( ( got ) =>
   {
     let entity = got.entities[ 0 ];
-    
-    let expectedParams = 
+
+    let expectedParams =
     [
-      { "name" : `argument`, "description" : null, "optional" : false }, 
-      { "name" : `argument`, "description" : `Description`, "optional" : false }, 
-      { "name" : `argument`, "description" : `Description no dash`, "optional" : false }, 
+      { "name" : `argument`, "description" : null, "optional" : false },
+      { "name" : `argument`, "description" : `Description`, "optional" : false },
+      { "name" : `argument`, "description" : `Description no dash`, "optional" : false },
       {
-        "name" : `options`, 
-        "description" : `Description`, 
-        "optional" : false, 
+        "name" : `options`,
+        "description" : `Description`,
+        "optional" : false,
         "type" : `Object`
-      }, 
+      },
       {
-        "name" : `options`, 
-        "description" : `Description without dash`, 
-        "optional" : false, 
+        "name" : `options`,
+        "description" : `Description without dash`,
+        "optional" : false,
         "type" : `Object`
-      }, 
+      },
       {
-        "name" : `options.property`, 
-        "description" : `Description`, 
-        "optional" : false, 
+        "name" : `options.property`,
+        "description" : `Description`,
+        "optional" : false,
         "type" : `Object`
-      }, 
+      },
       {
-        "name" : `options.property`, 
-        "description" : `Description without dash`, 
-        "optional" : false, 
+        "name" : `options.property`,
+        "description" : `Description without dash`,
+        "optional" : false,
         "type" : `Object`
-      }, 
-      { 
-        "name" : `options.array`, 
+      },
+      {
+        "name" : `options.array`,
         "description" : `Description`,
         "optional" : true,
-        "type" : `String[]` 
-      }, 
-      { 
-        "name" : `options.array`, 
+        "type" : `String[]`
+      },
+      {
+        "name" : `options.array`,
         "description" : `Description without dash`,
         "optional" : true,
-        "type" : `String[]` 
-      }, 
+        "type" : `String[]`
+      },
       {
-        "name" : `options.allowSomething`, 
-        "description" : `Description`, 
-        "optional" : true, 
-        "default" : `true`, 
+        "name" : `options.allowSomething`,
+        "description" : `Description`,
+        "optional" : true,
+        "default" : `true`,
         "type" : `Boolean`
-      }, 
+      },
       {
-        "name" : `options.allowSomething`, 
-        "description" : `Description without dash`, 
-        "optional" : true, 
-        "default" : `true`, 
+        "name" : `options.allowSomething`,
+        "description" : `Description without dash`,
+        "optional" : true,
+        "default" : `true`,
         "type" : `Boolean`
-      }, 
-      { 
-        "name" : `objects`, 
+      },
+      {
+        "name" : `objects`,
         "description" : `Description without dash`,
         "optional" : false,
         "type" : `Object[]`
-      }, 
+      },
       {
-        "name" : `objects[].name`, 
-        "description" : `Description`, 
-        "optional" : false, 
+        "name" : `objects[].name`,
+        "description" : `Description`,
+        "optional" : false,
         "type" : `String`
       }
-    ] 
-      
-    let expectedTemplateData = 
+    ]
+
+    let expectedTemplateData =
     {
       name: "paramTest",
       namespace: "testSpace",
       params : expectedParams
     }
-    
+
     let templateData = entity.templateDataMake();
-    
+
     test.contains( templateData, expectedTemplateData );
 
     return got;
   })
-  
-  //
-  
+
+  /* */
+
   .then( ( got ) =>
   {
     let entity = got.entities[ 1 ];
-    
-    let expectedParams = 
+
+    let expectedParams =
     [
-      { 
-        "name" : `argument`, 
-        "description" : null, 
+      {
+        "name" : `argument`,
+        "description" : null,
         "optional" : false,
         "type" : `...Number`
       }
-    ] 
-      
-    let expectedTemplateData = 
+    ]
+
+    let expectedTemplateData =
     {
       name: "paramTest",
       namespace: "testSpace",
       params : expectedParams
     }
-    
+
     let templateData = entity.templateDataMake();
-    
+
     test.contains( templateData, expectedTemplateData );
 
     return got;
   })
-  
-  //
-  
+
+  /* */
+
   return ready;
 }
 
@@ -788,37 +788,37 @@ function paramBadTemplateData( test )
     return got;
   })
 
-  //
-  
+  /* */
+
   .then( ( got ) =>
   {
     let entity = got.entities[ 0 ];
-    
-    let expectedParams = 
+
+    let expectedParams =
     [
-      { 
+      {
         "description": null,
         "name": "argument",
         "optional": false
       }
-    ] 
-      
-    let expectedTemplateData = 
+    ]
+
+    let expectedTemplateData =
     {
       name: "paramTest",
       namespace: "testSpace",
       params : expectedParams
     }
-    
+
     let templateData = entity.templateDataMake();
-    
+
     test.contains( templateData, expectedTemplateData );
 
     return got;
   })
-  
-  //
-  
+
+  /* */
+
   return ready;
 }
 
@@ -937,7 +937,7 @@ function complexDocletParse( test )
     return null;
   })
 
-  //
+  /* */
 
   return ready;
 }
@@ -966,20 +966,21 @@ var Self =
   tests :
   {
 
-    // basic
+    /* */ basic
 
     namespace,
     routine,
-    
+
     paramGoodRaw,
     paramBadRaw,
-    
+
     paramGoodTemplateData,
     paramBadTemplateData,
 
-    //complex
+    /* */complex
 
-    complexDocletParse
+    complexDocletParse,
+
   },
 
 }

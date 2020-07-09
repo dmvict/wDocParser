@@ -26,7 +26,7 @@ function _form()
   return;
 
   self.formed = 1;
-  
+
   return self;
 }
 
@@ -35,13 +35,13 @@ function _form()
 function _typeGet()
 {
   let self = this;
-  
+
   if( self.tags.typedef )
   return 'typedef'
-  
+
   if( self.tags.callback )
   return 'callback'
-  
+
   if( self.tags.constructor )
   return 'constructor';
 
@@ -89,14 +89,14 @@ function _templateDataMake()
 {
   let self = this;
   let type = self.typeGet();
-  
+
   _.assert( _.objectIs( self.templateData ) );
-  
+
   let td = self.templateData;
   let tags = self.tags;
-  
+
   let description = self.structure.description;
-  
+
   if( description )
   {
     description = _.strLinesStrip( description );
@@ -106,20 +106,20 @@ function _templateDataMake()
     td.description = description;
   }
   if( tags.summary )
-  { 
+  {
     // td.summary = td.summary ? td.summary + '\n' : '';
-    td.summary = tags.summary.description; 
+    td.summary = tags.summary.description;
   }
   if( tags.description )
   {
     td.description = td.description ? td.description + '\n' : '';
-    td.description += tags.description.description; 
+    td.description += tags.description.description;
   }
-  
+
   if( tags[ type ] )
   td.name = tags[ type ].name || tags[ type ].description; //callback tags stores it name in description
   td.kind = type;
-  
+
   if( type === 'module' )
   {
     td.module = unprefix( tags.module.name );
@@ -131,52 +131,52 @@ function _templateDataMake()
     td.module = unprefix( tags.module.name );
   }
   else if( type === 'class' )
-  { 
+  {
     td.class = unprefix( tags.class.name );
     if( tags.namespace )
     td.namespace = unprefix( tags.namespace.name );
     if( tags.module )
     td.module = unprefix( tags.module.name );
-    
+
     if( tags.classdesc )
     {
       td.description = td.description ? td.description + '\n' : '';
-      td.description += tags.classdesc.description; 
+      td.description += tags.classdesc.description;
     }
   }
   else if( type === 'typedef' )
   {
     td.name = tags.typedef.name
     paramTypeMake( td, tags.typedef )
-    
+
     if( tags.property )
-    td.properties = _.arrayAs( tags.property ).map( ( e ) => 
-    { 
-      let property = 
-      { 
-        name : e.name, 
-        description : e.description, 
+    td.properties = _.arrayAs( tags.property ).map( ( e ) =>
+    {
+      let property =
+      {
+        name : e.name,
+        description : e.description,
         optional : false
-      } 
-      
+      }
+
       if( e.default )
       property.default = e.default;
-      
+
       paramTypeMake( property, e )
-      
+
       return property;
     })
   }
   else
-  { 
-    
+  {
+
     if( tags.method )
     {
       td.name = tags.method.name;
       td.kind = 'method'
     }
     else if( tags.routine )
-    { 
+    {
       td.name = tags.routine.description;
       td.kind = 'static routine'
     }
@@ -184,110 +184,110 @@ function _templateDataMake()
     {
       td.kind = 'method'
     }
-    
+
     if( type === 'function' )
     if( tags.static || !tags.class && tags.namespace )
     td.kind = 'static routine';
-    
+
     //
-    
+
     if( tags.param )
-    td.params = _.arrayAs( tags.param ).map( ( e ) => 
-    { 
-      let param = 
-      { 
-        name : e.name, 
-        description : e.description, 
+    td.params = _.arrayAs( tags.param ).map( ( e ) =>
+    {
+      let param =
+      {
+        name : e.name,
+        description : e.description,
         optional : false
-      } 
-      
+      }
+
       if( e.default )
       param.default = e.default;
-      
+
       paramTypeMake( param, e );
-      
+
       //workaround for "@param { type } - description" -> null-null
-      if( param.name === 'null-null' ) 
+      if( param.name === 'null-null' )
       param.name = null;
-      
+
       return param;
     })
-    
+
     //
-    
+
     if( tags.returns )
-    td.returns = _.arrayAs( tags.returns ).map( ( e ) => 
-    { 
+    td.returns = _.arrayAs( tags.returns ).map( ( e ) =>
+    {
       _.assert( _.objectIs( e ), 'Expects signle return tag' );
-      
-      let returns = 
-      { 
-        description : e.description 
+
+      let returns =
+      {
+        description : e.description
       }
-      
+
       if( e.type )
       returns.type = e.type.name;
-      
+
       paramTypeMake( returns, e )
-      
+
       return returns;
     })
-    
+
     //
-    
+
     if( tags.example )
-    td.examples = _.arrayAs( tags.example ).map( ( e ) => 
-    { 
-      return { code : e.description } 
+    td.examples = _.arrayAs( tags.example ).map( ( e ) =>
+    {
+      return { code : e.description }
     })
-    
+
     //
-    
+
     if( tags.throws )
-    td.throws = _.arrayAs( tags.throws ).map( ( e ) => 
-    { 
-      let returnDescriptor = { description : e.description } 
+    td.throws = _.arrayAs( tags.throws ).map( ( e ) =>
+    {
+      let returnDescriptor = { description : e.description }
       paramTypeMake( returnDescriptor, e )
       return returnDescriptor;
     })
-    
+
     //
-    
+
     if( tags.class )
     td.class = unprefix( tags.class.name );
-    
+
     if( tags.namespace )
     td.namespace = unprefix( tags.namespace.name );
-    
+
     if( tags.module )
     td.module = unprefix( tags.module.name );
-    
+
   }
-  
+
   _.assert( _.strDefined( self.templateData.name ), `Entity should have name.\nType:${type}\n Source structure:${_.toJs( self.structure)}\n Source comment:${self.comment}` )
-  
+
   self.templateData.name = unprefix( self.templateData.name );
-  
+
   return self.templateData;
-  
+
   /*  */
-  
+
   function paramTypeMake( param, paramTag, postfix )
-  { 
+  {
     let type = paramTag.type;
-    
+
     if( arguments.length === 2 )
     postfix = '';
-    
+
     if( !_.objectIs( type ) )
     {
       if( self.verbosity )
       _.errLogOnce( `Failed to get type of param tag: ${_.toJs( paramTag )}. \n Comment:${self.comment}`  );
       return;
     }
-    
+
     if( type.type === 'NameExpression' )
-    { 
+    {
       param.type = type.name + postfix;
     }
     else if( type.type === 'OptionalType' )
@@ -296,7 +296,7 @@ function _templateDataMake()
       return paramTypeMake( param, { type : type.expression } );
     }
     else if( type.type === 'UnionType' )
-    { 
+    {
       param.type = type.elements.map( ( t ) => t.name ).join( '|' )
     }
     else if( type.type === 'AllLiteral' )
@@ -306,7 +306,7 @@ function _templateDataMake()
     else if( type.type === 'TypeApplication' )
     {
       paramTypeMake( param, { type : type.expression } );
-      param.type = type.applications.map( ( t ) => 
+      param.type = type.applications.map( ( t ) =>
       {
         let current = Object.create( null );
         paramTypeMake( current, { type : t }, '[]' );
@@ -320,7 +320,7 @@ function _templateDataMake()
       param.type = '...' + param.type;
     }
   }
-  
+
   function unprefix( src )
   {
     let firstIsSmall = /[a-z]/.test( src[ 0 ] );
@@ -331,8 +331,6 @@ function _templateDataMake()
     return src;
   }
 }
-
-//
 
 // --
 // relations
@@ -375,10 +373,10 @@ let Extend =
 {
 
   _form,
-  
+
   _typeGet,
   _orphanIs,
-  
+
   _templateDataMake,
 
   // relations
@@ -404,9 +402,8 @@ _.classDeclare
 
 //
 
+_.docgen[ Self.shortName ] = Self;
 if( typeof module !== 'undefined' && module !== null )
 module[ 'exports' ] = Self;
-
-_.docgen[ Self.shortName ] = Self;
 
 })();

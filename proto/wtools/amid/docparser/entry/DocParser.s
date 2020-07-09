@@ -1,4 +1,4 @@
-( function _Include_s_( ) {
+( function _DocParser_s_( ) {
 
 'use strict';
 
@@ -9,8 +9,8 @@
 
 if( typeof module !== 'undefined' )
 {
-  require( './include/Base.s' );
-  require( './include/Mid.s' );
+  require( '../include/Base.s' );
+  require( '../include/Mid.s' );
 }
 
 if( typeof module !== 'undefined' && module !== null )

@@ -40,17 +40,17 @@ let commentRegexp = /\/\*\*\s*\n([^\*]|(\*(?!\/)))*\*\//g
 function _parse( filePath )
 {
   let self = this;
-  
+
   let sourceCode = self.provider.fileRead({ filePath })
-  
+
   if( !self.inacurate )
-  { 
+  {
     let file = _.introspector.File({ data : sourceCode, sys : self.introspector });
     file.refine();
-    
+
     if( !file.product.byType.gComment )
     return null;
-    
+
     file.product.byType.gComment.each( comment => self._commentHandle( comment, filePath ) );
   }
   else
@@ -58,8 +58,8 @@ function _parse( filePath )
     let comments = sourceCode.match( commentRegexp );
     if( !comments )
     return;
-    
-    comments.forEach( comment => 
+
+    comments.forEach( comment =>
     {
       self._commentHandle( { text : comment,startPosition : { row : 0}, endPosition : { row : 0 } }, filePath )
     })
@@ -69,11 +69,11 @@ function _parse( filePath )
 //
 
 function _doctrineParseComment( comment,filePath )
-{ 
+{
   let self = this;
-  let o = 
-  { 
-    strict : false, 
+  let o =
+  {
+    strict : false,
     recoverable : true,
     sloppy : true,
     range : true
@@ -83,7 +83,7 @@ function _doctrineParseComment( comment,filePath )
     return doctrine.parse( doctrine.unwrapComment( comment.text ), o );
   }
   catch( err )
-  { 
+  {
     if( self.vebosity )
     _.errLogOnce( `Failed to parse comment:${comment.text}\nFile:${filePath}\nRow:${comment.startPosition.row}\nReason:`, err )
   }
@@ -94,14 +94,14 @@ function _doctrineParseComment( comment,filePath )
 function _commentHandle( comment, filePath )
 {
   let self = this;
-  
+
   let structure = self._doctrineParseComment( comment,filePath );
-  
+
   if( !structure )
   return;
   if( !structure.tags.length )
   return;
-  
+
   let entity = self._makeSeveralMaybe( structure, comment, filePath );
   self.product.addEntity( entity );
 }
@@ -111,9 +111,9 @@ function _commentHandle( comment, filePath )
 function _tagsToMap( structure )
 {
   let self = this;
-  
+
   let tags = Object.create( null );
-  
+
   structure.tags.forEach( ( tag ) =>
   {
     if( tags[ tag.title ] )
@@ -124,7 +124,7 @@ function _tagsToMap( structure )
     else
     tags[ tag.title ] = tag;
   })
-  
+
   return tags;
 }
 
@@ -132,25 +132,25 @@ function _tagsToMap( structure )
 
 function _typeTagNameGet( tags )
 {
-  
+
   if( tags.routine )
   return 'static routine';
-  
+
   if( tags.typedef )
   return 'typedef';
-  
+
   if( tags.constructor )
   return 'constructor';
-  
+
   if( tags.function )
   return 'function';
 
   if( tags.method )
   return 'method';
-  
+
   if( tags.callback )
   return 'callback';
-  
+
   if( tags.class )
   return 'class';
 
@@ -166,7 +166,7 @@ function _typeTagNameGet( tags )
 //
 
 function _entityMake( o )
-{ 
+{
   let self = this;
   let entity = new _.docgen.EntityJsdoc( o );
   return entity.form();
@@ -177,16 +177,16 @@ function _entityMake( o )
 function _makeSeveralMaybe( structure, comment, filePath )
 {
   let self = this;
-  
+
   let tags = self._tagsToMap( structure );
   let type = self._typeTagNameGet( tags );
   let position = { start : comment.startPosition, end : comment.endPosition }
-  
+
   comment = comment.text;
-  
+
   let result = [];
   let tag = tags[ type ];
-  
+
   if( !_.arrayIs( tag ) )
   return self._entityMake
   ({
@@ -196,12 +196,12 @@ function _makeSeveralMaybe( structure, comment, filePath )
     position,
     tags,
   });
-  
+
   for( let i = 0; i < tag.length; i++ )
-  { 
+  {
     let currentTags = _.cloneData({ src : tags });
     currentTags[ type ] = tag[ i ];
-    
+
     let entity = self._entityMake
     ({
       structure,
@@ -211,10 +211,10 @@ function _makeSeveralMaybe( structure, comment, filePath )
       tags : currentTags,
     });
     entity.form();
-    
+
     result.push( entity );
   }
-  
+
   return result;
 }
 
@@ -262,15 +262,15 @@ let Extend =
   _form,
 
   _parse,
-  
+
   _doctrineParseComment,
   _commentHandle,
-  
+
   _tagsToMap,
   _typeTagNameGet,
   _entityMake,
   _makeSeveralMaybe,
- 
+
 
   // relations
 
@@ -295,9 +295,8 @@ _.classDeclare
 
 //
 
+_.docgen[ Self.shortName ] = Self;
 if( typeof module !== 'undefined' && module !== null )
 module[ 'exports' ] = Self;
-
-_.docgen[ Self.shortName ] = Self;
 
 })();

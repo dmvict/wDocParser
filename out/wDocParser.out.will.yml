@@ -109,7 +109,7 @@ module:
       entry.proto.no.tests:
         criterion:
           tests: no.tests
-        path: ../proto/dwtools/amid/docparser/Include.s
+        path: ../proto/wtools/amid/docparser/Include.s
       entry.proto.only.tests:
         criterion:
           tests: only.tests
@@ -119,13 +119,13 @@ module:
           debug: debug
           raw: raw
           content: prime
-        path: '{path::out.*=1}/source/dwtools/'
+        path: '{path::out.*=1}/source/wtools/'
       entry.out.raw.debug.release:
         criterion:
           debug: release
           raw: raw
           content: prime
-        path: '{path::out.*=1}/source/dwtools/'
+        path: '{path::out.*=1}/source/wtools/'
       entry.out.compiled.debug.debug:
         criterion:
           debug: debug
@@ -152,37 +152,37 @@ module:
         path:
           - ../proto
           - ../proto/Integration.test.s
-          - ../proto/dwtools
-          - ../proto/dwtools/Tools.s
-          - ../proto/dwtools/abase
-          - ../proto/dwtools/amid
-          - ../proto/dwtools/amid/docparser
-          - ../proto/dwtools/amid/docparser/Include.s
-          - ../proto/dwtools/amid/docparser/include
-          - ../proto/dwtools/amid/docparser/include/Base.s
-          - ../proto/dwtools/amid/docparser/include/Mid.s
-          - ../proto/dwtools/amid/docparser/l1
-          - ../proto/dwtools/amid/docparser/l1/Namespace.s
-          - ../proto/dwtools/amid/docparser/l3
-          - ../proto/dwtools/amid/docparser/l3/Entity.s
-          - ../proto/dwtools/amid/docparser/l3/Parser.s
-          - ../proto/dwtools/amid/docparser/l3/Product.s
-          - ../proto/dwtools/amid/docparser/l5
-          - ../proto/dwtools/amid/docparser/l5/EntityJsdoc.s
-          - ../proto/dwtools/amid/docparser/l5/ParserJsdoc.s
-          - ../proto/dwtools/amid/docparser.test
-          - ../proto/dwtools/amid/docparser.test/ParserJsdoc.test.s
-          - ../proto/dwtools/amid/docparser.test/_asset
-          - ../proto/dwtools/amid/docparser.test/_asset/basic
-          - ../proto/dwtools/amid/docparser.test/_asset/basic/function.js
-          - ../proto/dwtools/amid/docparser.test/_asset/basic/module.js
-          - ../proto/dwtools/amid/docparser.test/_asset/basic/namespace.js
-          - ../proto/dwtools/amid/docparser.test/_asset/basic/param
-          - ../proto/dwtools/amid/docparser.test/_asset/basic/param/paramBad.js
-          - ../proto/dwtools/amid/docparser.test/_asset/basic/param/paramGood.js
-          - ../proto/dwtools/amid/docparser.test/_asset/complexDoclet
-          - ../proto/dwtools/amid/docparser.test/_asset/complexDoclet/complex.js
-          - ../proto/dwtools/atop
+          - ../proto/wtools
+          - ../proto/wtools/Tools.s
+          - ../proto/wtools/abase
+          - ../proto/wtools/amid
+          - ../proto/wtools/amid/docparser
+          - ../proto/wtools/amid/docparser/Include.s
+          - ../proto/wtools/amid/docparser/include
+          - ../proto/wtools/amid/docparser/include/Base.s
+          - ../proto/wtools/amid/docparser/include/Mid.s
+          - ../proto/wtools/amid/docparser/l1
+          - ../proto/wtools/amid/docparser/l1/Namespace.s
+          - ../proto/wtools/amid/docparser/l3
+          - ../proto/wtools/amid/docparser/l3/Entity.s
+          - ../proto/wtools/amid/docparser/l3/Parser.s
+          - ../proto/wtools/amid/docparser/l3/Product.s
+          - ../proto/wtools/amid/docparser/l5
+          - ../proto/wtools/amid/docparser/l5/EntityJsdoc.s
+          - ../proto/wtools/amid/docparser/l5/ParserJsdoc.s
+          - ../proto/wtools/amid/docparser.test
+          - ../proto/wtools/amid/docparser.test/ParserJsdoc.test.s
+          - ../proto/wtools/amid/docparser.test/_asset
+          - ../proto/wtools/amid/docparser.test/_asset/basic
+          - ../proto/wtools/amid/docparser.test/_asset/basic/function.js
+          - ../proto/wtools/amid/docparser.test/_asset/basic/module.js
+          - ../proto/wtools/amid/docparser.test/_asset/basic/namespace.js
+          - ../proto/wtools/amid/docparser.test/_asset/basic/param
+          - ../proto/wtools/amid/docparser.test/_asset/basic/param/paramBad.js
+          - ../proto/wtools/amid/docparser.test/_asset/basic/param/paramGood.js
+          - ../proto/wtools/amid/docparser.test/_asset/complexDoclet
+          - ../proto/wtools/amid/docparser.test/_asset/complexDoclet/complex.js
+          - ../proto/wtools/atop
     submodule:
       wTools:
         path: 'npm:///wTools'
@@ -933,7 +933,7 @@ module:
       entry.proto.no.tests:
         criterion:
           tests: no.tests
-        path: proto/dwtools/amid/docparser/Include.s
+        path: proto/wtools/amid/docparser/Include.s
       entry.proto.only.tests:
         criterion:
           tests: only.tests
@@ -943,13 +943,13 @@ module:
           debug: debug
           raw: raw
           content: prime
-        path: '{path::out.*=1}/source/dwtools/'
+        path: '{path::out.*=1}/source/wtools/'
       entry.out.raw.debug.release:
         criterion:
           debug: release
           raw: raw
           content: prime
-        path: '{path::out.*=1}/source/dwtools/'
+        path: '{path::out.*=1}/source/wtools/'
       entry.out.compiled.debug.debug:
         criterion:
           debug: debug
