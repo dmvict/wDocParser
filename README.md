@@ -6,6 +6,6 @@ Module for parsing documentation inlined into source code.
 ## Try out
 ```
 npm install
-node sample/Sample.js
+node sample/Sample.s
 ```
 
