@@ -946,7 +946,7 @@ function complexDocletParse( test )
 // proto
 // --
 
-var Self =
+let Self =
 {
 
   name : 'ParserJsdoc',
