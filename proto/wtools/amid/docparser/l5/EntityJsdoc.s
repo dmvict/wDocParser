@@ -369,7 +369,7 @@ let Forbids =
 // declare
 // --
 
-let Extend =
+let Extension =
 {
 
   _form,
@@ -397,7 +397,7 @@ _.classDeclare
 ({
   cls : Self,
   parent : Parent,
-  extend : Extend,
+  extend : Extension,
 });
 
 //
