@@ -1,5 +1,5 @@
 
-# module::DocParser [![Status](https://github.com/Wandalen/wDocParser/workflows/publish/badge.svg)](https://github.com/Wandalen/wDocParser/actions?query=workflow%3Apublish) [![experimental](https://img.shields.io/badge/stability-experimental-orange.svg)](https://github.com/emersion/stability-badges#experimental)
+# module::DocParser [![status](https://github.com/Wandalen/wDocParser/workflows/publish/badge.svg)](https://github.com/Wandalen/wDocParser/actions?query=workflow%3Apublish) [![experimental](https://img.shields.io/badge/stability-experimental-orange.svg)](https://github.com/emersion/stability-badges#experimental)
 
 Module for parsing documentation inlined into source code.
 
