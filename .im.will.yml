@@ -65,7 +65,7 @@ path :
       content : prime
 
   entry.proto.no.tests :
-    path : proto/wtools/amid/docparser/Include.s
+    path : proto/wtools/amid/docparser/entry/DocParser.s
     criterion :
       tests : 'no.tests'
   entry.proto.only.tests :
