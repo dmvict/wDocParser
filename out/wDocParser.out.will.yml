@@ -1537,6 +1537,4 @@ module:
       ../.im.will.yml:
         hash: 9ddf420229433819c977d5b9e2e0528e
         size: 5147
-      wDocParser.out.will.yml:
-        hash: db374cd8fb11dcc44e8ae6399f3761f2
-        size: 39956
+      wDocParser.out.will.yml: *ref_0
