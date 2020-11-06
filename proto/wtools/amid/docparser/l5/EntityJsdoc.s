@@ -189,49 +189,13 @@ function _templateDataMake()
     if( tags.static || !tags.class && tags.namespace )
     td.kind = 'static routine';
 
-    //
+    /* params */
 
-    if( tags.param )
-    td.params = _.arrayAs( tags.param ).map( ( e ) =>
-    {
-      let param =
-      {
-        name : e.name,
-        description : e.description,
-        optional : false
-      }
+    handleParams();
 
-      if( e.default )
-      param.default = e.default;
-
-      paramTypeMake( param, e );
-
-      //workaround for "@param { type } - description" -> null-null
-      if( param.name === 'null-null' )
-      param.name = null;
-
-      return param;
-    })
-
-    //
-
-    if( tags.returns )
-    td.returns = _.arrayAs( tags.returns ).map( ( e ) =>
-    {
-      _.assert( _.objectIs( e ), 'Expects signle return tag' );
-
-      let returns =
-      {
-        description : e.description
-      }
-
-      if( e.type )
-      returns.type = e.type.name;
-
-      paramTypeMake( returns, e )
-
-      return returns;
-    })
+    /* returns */
+    
+    handleReturns();
 
     //
 
@@ -321,6 +285,8 @@ function _templateDataMake()
     }
   }
 
+  /*  */
+  
   function unprefix( src )
   {
     let firstIsSmall = /[a-z]/.test( src[ 0 ] );
@@ -330,7 +296,88 @@ function _templateDataMake()
     return src.slice( 1 );
     return src;
   }
+  
+  /*  */
+  
+  function handleParams()
+  {
+    ParamTags.forEach( ( key ) => 
+    {
+      if( !tags[ key ] )
+      return;
+      
+      let result = _.arrayAs( tags[ key ] ).map( ( e ) =>
+      {
+        let param =
+        {
+          name : e.name,
+          description : e.description,
+          optional : false
+        }
+
+        if( e.default )
+        param.default = e.default;
+
+        paramTypeMake( param, e );
+
+        //workaround for "@param { type } - description" -> null-null
+        if( param.name === 'null-null' )
+        param.name = null;
+
+        return param;
+      })
+      
+      if( !td.params )
+      td.params = [];
+      
+      _.arrayAppendArray( td.params, result );
+    })
+  }
+  
+  /*  */
+  
+  function handleReturns()
+  {
+    ReturnTags.forEach( ( key ) => 
+    {
+      if( !tags[ key ] )
+      return;
+      
+      let result = _.arrayAs( tags[ key ] ).map( ( e ) =>
+      {
+        _.assert( _.objectIs( e ), `Expects single ${key} tag` );
+
+        let returns =
+        {
+          description : e.description
+        }
+
+        if( e.type )
+        returns.type = e.type.name;
+
+        paramTypeMake( returns, e )
+
+        return returns;
+      })
+      
+      if( !td.returns )
+      td.returns = [];
+      
+      _.arrayAppendArray( td.returns, result );
+    })
+  }
+  
 }
+
+let ParamTags = 
+[
+  'param', 'arg', 'argument'
+]
+
+let ReturnTags = 
+[
+  'return', 'returns'
+]
 
 // --
 // relations
