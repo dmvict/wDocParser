@@ -58,7 +58,7 @@ function namespace( test )
   ready
   .then( ( got ) =>
   {
-    test.is( got instanceof _.docgen.Product );
+    test.true( got instanceof _.docgen.Product );
     test.identical( got.entities.length, 3 );
     test.identical( got.orphans.length, 1 );
     test.identical( got.byType.module.length, 0 );
@@ -85,7 +85,7 @@ function namespace( test )
       end : { row : 4 }
     }
 
-    test.is( _.strDefined( namespace.comment ) );
+    test.true( _.strDefined( namespace.comment ) );
     test.contains( namespace.structure, expectedStructure );
     test.identical( namespace.filePath, a.abs( 'namespace.js' ) );
     test.contains( namespace.position, expectedPosition );
@@ -113,7 +113,7 @@ function namespace( test )
       end : { row : 11 }
     }
 
-    test.is( _.strDefined( namespace.comment ) );
+    test.true( _.strDefined( namespace.comment ) );
     test.contains( namespace.structure, expectedStructure );
     test.identical( namespace.filePath, a.abs( 'namespace.js' ) );
     test.contains( namespace.position, expectedPosition );
@@ -143,7 +143,7 @@ function namespace( test )
       end : { row : 18 }
     }
 
-    test.is( _.strDefined( namespace.comment ) );
+    test.true( _.strDefined( namespace.comment ) );
     test.contains( namespace.structure, expectedStructure );
     test.identical( namespace.filePath, a.abs( 'namespace.js' ) );
     test.contains( namespace.position, expectedPosition );
@@ -175,7 +175,7 @@ function routine( test )
   ready
   .then( ( got ) =>
   {
-    test.is( got instanceof _.docgen.Product );
+    test.true( got instanceof _.docgen.Product );
     test.identical( got.entities.length, 2 );
     test.identical( got.orphans.length, 0 );
     test.identical( got.byType.module.length, 0 );
@@ -205,7 +205,7 @@ function routine( test )
       end : { row : 7 }
     }
 
-    test.is( _.strDefined( namespace.comment ) );
+    test.true( _.strDefined( namespace.comment ) );
     test.contains( namespace.structure, expectedStructure );
     test.identical( namespace.filePath, a.abs( 'function.js' ) );
     test.contains( namespace.position, expectedPosition );
@@ -235,7 +235,7 @@ function routine( test )
       end : { row : 7 }
     }
 
-    test.is( _.strDefined( namespace.comment ) );
+    test.true( _.strDefined( namespace.comment ) );
     test.contains( namespace.structure, expectedStructure );
     test.identical( namespace.filePath, a.abs( 'function.js' ) );
     test.contains( namespace.position, expectedPosition );
@@ -267,7 +267,7 @@ function paramGoodRaw( test )
   ready
   .then( ( got ) =>
   {
-    test.is( got instanceof _.docgen.Product );
+    test.true( got instanceof _.docgen.Product );
     test.identical( got.entities.length, 2 );
     test.identical( got.orphans.length, 0 );
     test.identical( got.byType.module.length, 0 );
@@ -554,7 +554,7 @@ function paramBadRaw( test )
   ready
   .then( ( got ) =>
   {
-    test.is( got instanceof _.docgen.Product );
+    test.true( got instanceof _.docgen.Product );
     test.identical( got.entities.length, 1 );
     test.identical( got.orphans.length, 0 );
     test.identical( got.byType.module.length, 0 );
@@ -627,7 +627,7 @@ function paramGoodTemplateData( test )
   ready
   .then( ( got ) =>
   {
-    test.is( got instanceof _.docgen.Product );
+    test.true( got instanceof _.docgen.Product );
     test.identical( got.entities.length, 2 );
     test.identical( got.orphans.length, 0 );
     test.identical( got.byType.module.length, 0 );
@@ -778,7 +778,7 @@ function paramBadTemplateData( test )
   ready
   .then( ( got ) =>
   {
-    test.is( got instanceof _.docgen.Product );
+    test.true( got instanceof _.docgen.Product );
     test.identical( got.entities.length, 1 );
     test.identical( got.orphans.length, 0 );
     test.identical( got.byType.module.length, 0 );
@@ -842,7 +842,7 @@ function complexDocletParse( test )
 
   ready.then( ( got ) =>
   {
-    test.is( got instanceof _.docgen.Product );
+    test.true( got instanceof _.docgen.Product );
     test.identical( got.entities.length, 1 );
     test.identical( got.orphans.length, 0 );
     test.identical( got.byType.module.length, 0 );
@@ -929,7 +929,7 @@ function complexDocletParse( test )
 
     let entity = got.entities[ 0 ];
 
-    test.is( _.strDefined( entity.comment ) );
+    test.true( _.strDefined( entity.comment ) );
     test.contains( entity.structure, expectedStructure );
     test.identical( entity.filePath, a.abs( 'complex.js' ) );
     test.contains( entity.position, expectedPosition );
