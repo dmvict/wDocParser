@@ -25,8 +25,10 @@ function onSuiteBegin()
   let self = this;
   let path = _.fileProvider.path;
 
-  self.suiteTempPath = path.tempOpen( path.join( __dirname, '../..'  ), 'err' );
-  self.assetsOriginalSuitePath = path.join( __dirname, '_asset' );
+  // self.suiteTempPath = path.tempOpen( path.join( __dirname, '../..'  ), 'err' );
+  // self.assetsOriginalSuitePath = path.join( __dirname, '_asset' );
+  self.suiteTempPath = path.tempOpen( path.join( __dirname, '../..' ), 'err' );
+  self.assetsOriginalPath = path.join( __dirname, '_asset' );
 
 }
 
@@ -46,7 +48,9 @@ function onSuiteEnd()
 
 function namespace( test )
 {
-  let a = test.assetFor( 'basic');
+  let context = this;
+
+  let a = test.assetFor( 'basic' );
 
   a.reflect();
 
@@ -828,7 +832,7 @@ function paramBadTemplateData( test )
 
 function complexDocletParse( test )
 {
-  let a = test.assetFor( 'complexDoclet');
+  let a = test.assetFor( 'complexDoclet' );
 
   a.reflect();
 
@@ -959,8 +963,9 @@ let Self =
   context :
   {
     suiteTempPath : null,
-    assetsOriginalSuitePath : null,
-    appJsPath : null
+    // assetsOriginalSuitePath : null,
+    assetsOriginalPath : null,
+    // appJsPath : null
   },
 
   tests :
