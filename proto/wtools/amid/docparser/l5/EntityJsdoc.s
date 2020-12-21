@@ -1,4 +1,5 @@
-( function _EntityJsdoc_s_() {
+( function _EntityJsdoc_s_()
+{
 
 'use strict';
 
@@ -6,7 +7,8 @@
 
 let _ = _global_.wTools;
 let Parent = _.docgen.Entity;
-let Self = function wEntityJsdoc( o )
+let Self = wEntityJsdoc;
+function wEntityJsdoc( o )
 {
   return _.workpiece.construct( Self, this, arguments );
 }
@@ -194,7 +196,7 @@ function _templateDataMake()
     handleParams();
 
     /* returns */
-    
+
     handleReturns();
 
     //
@@ -228,7 +230,11 @@ function _templateDataMake()
 
   }
 
-  _.assert( _.strDefined( self.templateData.name ), `Entity should have name.\nType:${type}\n Source structure:${_.toJs( self.structure)}\n Source comment:${self.comment}` )
+  _.assert
+  (
+    _.strDefined( self.templateData.name ),
+    `Entity should have name.\nType:${type}\n Source structure:${_.toJs( self.structure)}\n Source comment:${self.comment}`
+  )
 
   self.templateData.name = unprefix( self.templateData.name );
 
@@ -286,7 +292,7 @@ function _templateDataMake()
   }
 
   /*  */
-  
+
   function unprefix( src )
   {
     let firstIsSmall = /[a-z]/.test( src[ 0 ] );
@@ -296,16 +302,16 @@ function _templateDataMake()
     return src.slice( 1 );
     return src;
   }
-  
+
   /*  */
-  
+
   function handleParams()
   {
-    ParamTags.forEach( ( key ) => 
+    ParamTags.forEach( ( key ) =>
     {
       if( !tags[ key ] )
       return;
-      
+
       let result = _.arrayAs( tags[ key ] ).map( ( e ) =>
       {
         let param =
@@ -326,23 +332,23 @@ function _templateDataMake()
 
         return param;
       })
-      
+
       if( !td.params )
       td.params = [];
-      
+
       _.arrayAppendArray( td.params, result );
     })
   }
-  
+
   /*  */
-  
+
   function handleReturns()
   {
-    ReturnTags.forEach( ( key ) => 
+    ReturnTags.forEach( ( key ) =>
     {
       if( !tags[ key ] )
       return;
-      
+
       let result = _.arrayAs( tags[ key ] ).map( ( e ) =>
       {
         _.assert( _.objectIs( e ), `Expects single ${key} tag` );
@@ -359,25 +365,19 @@ function _templateDataMake()
 
         return returns;
       })
-      
+
       if( !td.returns )
       td.returns = [];
-      
+
       _.arrayAppendArray( td.returns, result );
     })
   }
-  
+
 }
 
-let ParamTags = 
-[
-  'param', 'arg', 'argument'
-]
+let ParamTags = [ 'param', 'arg', 'argument' ]
 
-let ReturnTags = 
-[
-  'return', 'returns'
-]
+let ReturnTags = [ 'return', 'returns' ]
 
 // --
 // relations

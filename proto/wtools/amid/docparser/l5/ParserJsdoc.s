@@ -1,17 +1,21 @@
-( function _ParserJsdoc_s_() {
+( function _ParserJsdoc_s_()
+{
 
 'use strict';
 
+var doctrine;
+
 if( typeof module !== 'undefined' )
 {
-  var doctrine = require( 'doctrine' );
+  doctrine = require( 'doctrine' );
 }
 
 //
 
 let _ = _global_.wTools;
 let Parent = _.docgen.ParserAbstract;
-let Self = function wParserJsdoc( o )
+let Self = wParserJsdoc;
+function wParserJsdoc( o )
 {
   return _.workpiece.construct( Self, this, arguments );
 }
@@ -51,7 +55,7 @@ function _parse( filePath )
     if( !file.product.byType.gComment )
     return null;
 
-    file.product.byType.gComment.each( comment => self._commentHandle( comment, filePath ) );
+    file.product.byType.gComment.each( ( comment ) => self._commentHandle( comment, filePath ) );
   }
   else
   {
@@ -59,16 +63,16 @@ function _parse( filePath )
     if( !comments )
     return;
 
-    comments.forEach( comment =>
+    comments.forEach( ( comment ) =>
     {
-      self._commentHandle( { text : comment,startPosition : { row : 0}, endPosition : { row : 0 } }, filePath )
+      self._commentHandle( { text : comment, startPosition : { row : 0 }, endPosition : { row : 0 } }, filePath )
     })
   }
 }
 
 //
 
-function _doctrineParseComment( comment,filePath )
+function _doctrineParseComment( comment, filePath )
 {
   let self = this;
   let o =
@@ -95,7 +99,7 @@ function _commentHandle( comment, filePath )
 {
   let self = this;
 
-  let structure = self._doctrineParseComment( comment,filePath );
+  let structure = self._doctrineParseComment( comment, filePath );
 
   if( !structure )
   return;
