@@ -13,7 +13,7 @@ let jsParser = new _.docgen.ParserJsdoc
 jsParser.form();
 let ready = jsParser.parse();
 
-ready.then( ( product ) => 
+ready.then( ( product ) =>
 {
   console.log( _.toJson( product.entities ) )
   return null;
