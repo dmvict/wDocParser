@@ -1,6 +1,6 @@
 {
   "name" : "wdocparser",
-  "version" : "0.3.74",
+  "version" : "0.3.75",
   "description" : "Module for parsing documentation inlined into source code.",
   "author" : "Kostiantyn Wandalen <wanalen@01.school>",
   "license" : "MIT",
@@ -28,6 +28,6 @@
     "wintrospector" : "alpha",
     "doctrine" : "3.0.0"
   },
-  "devDependencies" : { "wdocparser" : "file:.", "wTesting" : "alpha" },
+  "devDependencies" : { "wdocparser" : "file:.", "eslint" : "7.1.0", "wTesting" : "alpha" },
   "keywords" : [ "wTools" ]
 }
