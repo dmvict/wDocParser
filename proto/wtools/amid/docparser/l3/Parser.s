@@ -1,4 +1,5 @@
-( function _Parser_s_() {
+( function _Parser_s_()
+{
 
 'use strict';
 
@@ -6,7 +7,8 @@
 
 let _ = _global_.wTools;
 let Parent = null;
-let Self = function wParserAbstact( o )
+let Self = wParserAbstact;
+function wParserAbstact( o )
 {
   return _.workpiece.construct( Self, this, arguments );
 }

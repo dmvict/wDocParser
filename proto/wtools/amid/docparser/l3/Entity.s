@@ -1,4 +1,5 @@
-( function _Entity_s_() {
+( function _Entity_s_()
+{
 
 'use strict';
 
@@ -6,7 +7,8 @@
 
 let _ = _global_.wTools;
 let Parent = null;
-let Self = function wEntity( o )
+let Self = wEntity;
+function wEntity( o )
 {
   return _.workpiece.construct( Self, this, arguments );
 }

@@ -1,4 +1,5 @@
-( function _Product_s_() {
+( function _Product_s_()
+{
 
 'use strict';
 
@@ -6,7 +7,8 @@
 
 let _ = _global_.wTools;
 let Parent = null;
-let Self = function wProduct( o )
+let Self = wProduct;
+function wProduct( o )
 {
   return _.workpiece.construct( Self, this, arguments );
 }
@@ -46,11 +48,11 @@ function form()
   self.byType.namespace = [];
   self.byType.module = [];
   self.byType.class = [];
-  
+
   self.byTypeAndName.namespace = {};
   self.byTypeAndName.module = {};
   self.byTypeAndName.class = {};
-  
+
   self.byParent.namespace = {};
   self.byParent.module = {};
   self.byParent.class = {};
@@ -62,7 +64,7 @@ function addEntity( entity )
 {
   let self = this;
   let entities = _.arrayAs( entity );
-  entities.forEach( entity => 
+  entities.forEach( ( entity ) =>
   {
     self._addEntity( entity );
   })
@@ -74,12 +76,12 @@ function _addEntity( entity )
 {
   let self = this;
   _.assert( entity instanceof _.docgen.EntityJsdoc );
-  
+
   self.entities.push( entity );
-  
+
   let type = entity.typeGet();
   if( self.byType[ type ] )
-  { 
+  {
     let name = entity.tags[ type ].name;
     if( !self.byTypeAndName[ type ][ name ] )
     {
@@ -87,35 +89,35 @@ function _addEntity( entity )
       self.byTypeAndName[ type ][ name ] = entity;
     }
   }
-  
+
   if( entity.orphanIs() )
   {
     self.orphans.push( entity );
   }
   else if( type !== 'module' )
-  { 
+  {
     if( type === 'namespace' )
     addToByParent( entity, entity.tags.module )
     else if( type === 'class' )
     addToByParent( entity, entity.tags.module )
-    else if( entity.tags.class ) 
+    else if( entity.tags.class )
     addToByParent( entity, entity.tags.class )
-    else if( entity.tags.namespace ) 
+    else if( entity.tags.namespace )
     addToByParent( entity, entity.tags.namespace )
-    else if( entity.tags.module ) 
+    else if( entity.tags.module )
     addToByParent( entity, entity.tags.module )
   }
-  
+
   /* */
-  
+
   function addToByParent( entity, parentTag )
-  { 
+  {
     let parentName = removePrefix( parentTag.name );
     let parenByKind = self.byParent[ parentTag.title ];
     parenByKind[ parentName ] = parenByKind[ parentName ] || []
     parenByKind[ parentName ].push( entity );
   }
-  
+
   function removePrefix( src )
   {
     let firstIsSmall = /[a-z]/.test( src[ 0 ] );
@@ -126,7 +128,7 @@ function _addEntity( entity )
     return src;
   }
 }
-  
+
 // --
 // relations
 // --
