@@ -1,6 +1,6 @@
 {
   "name": "wdocparser",
-  "version": "0.3.85",
+  "version": "0.3.86",
   "description": "Module for parsing documentation inlined into source code.",
   "author": "Kostiantyn Wandalen <wanalen@01.school>",
   "license": "MIT",
