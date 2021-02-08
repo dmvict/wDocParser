@@ -8,7 +8,7 @@ Module for parsing documentation inlined into source code.
 git clone https://github.com/Wandalen/wDocParser
 cd wDocParser
 npm install
-node sample/Sample.s
+node sample/trivial/Sample.s
 ```
 
 ## To add to your project
