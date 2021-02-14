@@ -47,17 +47,7 @@ function _parse( filePath )
 
   let sourceCode = self.provider.fileRead({ filePath })
 
-  if( !self.inacurate )
-  {
-    let file = _.introspector.File({ data : sourceCode, sys : self.introspector });
-    file.refine();
-
-    if( !file.product.byType.gComment )
-    return null;
-
-    file.product.byType.gComment.each( ( comment ) => self._commentHandle( comment, filePath ) );
-  }
-  else
+  if( self.inacurate )
   {
     let comments = sourceCode.match( commentRegexp );
     if( !comments )
@@ -67,6 +57,16 @@ function _parse( filePath )
     {
       self._commentHandle( { text : comment, startPosition : { row : 0 }, endPosition : { row : 0 } }, filePath )
     })
+  }
+  else
+  {
+    let file = _.introspector.File({ data : sourceCode, sys : self.introspector });
+    file.refine();
+
+    if( !file.product.byType.gComment )
+    return null;
+
+    file.product.byType.gComment.each( ( comment ) => self._commentHandle( comment, filePath ) );
   }
 }
 
