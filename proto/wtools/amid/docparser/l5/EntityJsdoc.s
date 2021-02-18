@@ -252,7 +252,7 @@ function _templateDataMake()
     if( !_.objectIs( type ) )
     {
       if( self.verbosity )
-      _.errLogOnce( `Failed to get type of param tag: ${_.toJs( paramTag )}. \n Comment:${self.comment}`  );
+      _.errLogOnce( `Failed to get type of param tag: ${_.toJs( paramTag )}. \n Comment:${self.comment}` );
       return;
     }
 
