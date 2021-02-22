@@ -233,7 +233,7 @@ function _templateDataMake()
   _.assert
   (
     _.strDefined( self.templateData.name ),
-    `Entity should have name.\nType:${type}\n Source structure:${_.toJs( self.structure)}\n Source comment:${self.comment}`
+    `Entity should have name.\nType:${type}\n Source structure:${_.entity.exportJs( self.structure)}\n Source comment:${self.comment}`
   )
 
   self.templateData.name = unprefix( self.templateData.name );
@@ -252,7 +252,7 @@ function _templateDataMake()
     if( !_.objectIs( type ) )
     {
       if( self.verbosity )
-      _.errLogOnce( `Failed to get type of param tag: ${_.toJs( paramTag )}. \n Comment:${self.comment}` );
+      _.errLogOnce( `Failed to get type of param tag: ${_.entity.exportJs( paramTag )}. \n Comment:${self.comment}` );
       return;
     }
 
