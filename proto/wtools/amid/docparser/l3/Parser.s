@@ -51,7 +51,7 @@ function form()
 {
   let self = this;
   _.assert( arguments.length === 0 );
-  _.assert( _.strDefined( self.inPath ) || _.objectIs( self.inPath ) );
+  _.assert( _.strDefined( self.inPath ) || _.objectIs( self.inPath ) || _.arrayIs( self.inPath ) );
   _.assert( self.basePath === null || _.strIs( self.basePath ) );
 
   self.product = new _.docgen.Product();
