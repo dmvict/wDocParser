@@ -233,7 +233,11 @@ function _templateDataMake()
   _.assert
   (
     _.strDefined( self.templateData.name ),
-    `Entity should have name.\nType:${type}\n Source structure:${_.entity.exportJs( self.structure)}\n Source comment:${self.comment}`
+    `Entity should have name.
+     Type:${type}
+     Source structure:${_.entity.exportJs( self.structure)}
+     Source comment:${self.comment}
+    `
   )
 
   self.templateData.name = unprefix( self.templateData.name );
