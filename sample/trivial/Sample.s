@@ -15,6 +15,6 @@ let ready = jsParser.parse();
 
 ready.then( ( product ) =>
 {
-  console.log( _.toJson( product.entities ) )
+  console.log( _.entity.exportJson( product.entities ) )
   return null;
 })
