@@ -490,7 +490,6 @@ function paramGoodRaw( test )
   .then( ( got ) =>
   {
     let entity = got.entities[ 1 ];
-    debugger
     let expectedParams =
     {
       'title' : `param`,
