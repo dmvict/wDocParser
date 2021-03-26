@@ -5,9 +5,9 @@
 
 //
 
-let _ = _global_.wTools;
+const _ = _global_.wTools;
 let Parent = _.docgen.Entity;
-let Self = wEntityJsdoc;
+const Self = wEntityJsdoc;
 function wEntityJsdoc( o )
 {
   return _.workpiece.construct( Self, this, arguments );

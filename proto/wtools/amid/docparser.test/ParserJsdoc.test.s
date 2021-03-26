@@ -6,7 +6,7 @@
 if( typeof module !== 'undefined' )
 {
 
-  let _ = require( '../../Tools.s' );
+  const _ = require( '../../Tools.s' );
   _.include( 'wTesting' );
 
   // require( './../docparser/Include.s' );
@@ -14,7 +14,7 @@ if( typeof module !== 'undefined' )
 
 }
 
-let _ = _global_.wTools;
+const _ = _global_.wTools;
 
 // --
 // context
@@ -949,7 +949,7 @@ function complexDocletParse( test )
 // proto
 // --
 
-let Self =
+const Proto =
 {
 
   name : 'ParserJsdoc',
@@ -991,7 +991,7 @@ let Self =
 
 //
 
-Self = wTestSuite( Self );
+const Self = wTestSuite( Proto );
 if( typeof module !== 'undefined' && !module.parent )
 wTester.test( Self.name );
 
