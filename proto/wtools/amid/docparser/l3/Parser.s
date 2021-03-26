@@ -6,7 +6,7 @@
 //
 
 const _ = _global_.wTools;
-let Parent = null;
+const Parent = null;
 const Self = wParserAbstact;
 function wParserAbstact( o )
 {

@@ -6,7 +6,7 @@
 //
 
 const _ = _global_.wTools;
-let Parent = _.docgen.Entity;
+const Parent = _.docgen.Entity;
 const Self = wEntityJsdoc;
 function wEntityJsdoc( o )
 {

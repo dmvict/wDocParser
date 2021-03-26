@@ -13,7 +13,7 @@ if( typeof module !== 'undefined' )
 //
 
 const _ = _global_.wTools;
-let Parent = _.docgen.ParserAbstract;
+const Parent = _.docgen.ParserAbstract;
 const Self = wParserJsdoc;
 function wParserJsdoc( o )
 {
