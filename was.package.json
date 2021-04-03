@@ -4,7 +4,7 @@
   "description" : "Module for parsing documentation inlined into source code.",
   "author" : "Kostiantyn Wandalen <wanalen@01.school>",
   "license" : "MIT",
-  "main" : "/pro/module/wDocParser/proto/node_modules/wdocparser",
+  "main" : "proto/node_modules/wdocparser",
   "files" : [ "proto/wtools/amid/docparser", "proto/wtools/Tools.s", "proto/node_modules" ],
   "scripts" : { "test" : "wtest .run 'proto/**' rapidity:-3", "docgen" : "wdocgen .build proto" },
   "repository" :
