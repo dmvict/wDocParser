@@ -1,42 +1,33 @@
 {
-  "name": "wdocparser",
-  "version": "0.3.108",
-  "description": "Module for parsing documentation inlined into source code.",
-  "author": "Kostiantyn Wandalen <wanalen@01.school>",
-  "license": "MIT",
-  "main": "proto/wtools/amid/docparser/entry/DocParser.s",
-  "files": [
-    "proto/wtools/amid/docparser",
-    "proto/wtools/Tools.s",
-    "proto/node_modules"
-  ],
-  "scripts": {
-    "test": "wtest .run 'proto/**' rapidity:-3",
-    "docgen": "wdocgen .build proto"
+  "name" : "wdocparser",
+  "version" : "0.3.109",
+  "description" : "Module for parsing documentation inlined into source code.",
+  "author" : "Kostiantyn Wandalen <wanalen@01.school>",
+  "license" : "MIT",
+  "main" : "/pro/module/wDocParser/proto/node_modules/wdocparser",
+  "files" : [ "proto/wtools/amid/docparser", "proto/wtools/Tools.s", "proto/node_modules" ],
+  "scripts" : { "test" : "wtest .run 'proto/**' rapidity:-3", "docgen" : "wdocgen .build proto" },
+  "repository" :
+  {
+    "type" : "git",
+    "url" : "https ://github.com/Wandalen/wDocParser.git"
   },
-  "repository": {
-    "type": "git",
-    "url": "https ://github.com/Wandalen/wDocParser.git"
+  "bugs" :
+  {
+    "url" : "https ://github.com/Wandalen/wDocParser/issues"
   },
-  "bugs": {
-    "url": "https ://github.com/Wandalen/wDocParser/issues"
+  "dependencies" :
+  {
+    "wTools" : "delta",
+    "wFiles" : "delta",
+    "wCopyable" : "delta",
+    "wConsequence" : "delta",
+    "wlooker" : "delta",
+    "wlookerextra" : "delta",
+    "wschema" : "delta",
+    "wintrospector" : "delta",
+    "doctrine" : "3.0.0"
   },
-  "dependencies": {
-    "wTools": "delta",
-    "wFiles": "delta",
-    "wCopyable": "delta",
-    "wConsequence": "delta",
-    "wlooker": "delta",
-    "wlookerextra": "delta",
-    "wschema": "delta",
-    "wintrospector": "delta",
-    "doctrine": "3.0.0"
-  },
-  "devDependencies": {
-    "eslint": "7.1.0",
-    "wTesting": "delta"
-  },
-  "keywords": [
-    "wTools"
-  ]
+  "devDependencies" : { "eslint" : "7.1.0", "wTesting" : "delta" },
+  "keywords" : [ "wTools" ]
 }
