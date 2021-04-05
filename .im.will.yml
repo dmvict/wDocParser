@@ -87,8 +87,8 @@ path:
       raw: compiled
       content: prime
   npm.proto.entry:
-    - /pro/module/wDocParser/proto/wtools/amid/docparser/entry/DocParser.s
-    - /pro/module/wDocParser/proto/node_modules/wdocparser
+    - proto/wtools/amid/docparser/entry/DocParser.s
+    - proto/node_modules/wdocparser
 reflector:
   reflect.proto:
     inherit: predefined.*
