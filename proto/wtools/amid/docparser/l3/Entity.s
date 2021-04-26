@@ -16,7 +16,7 @@ function wEntity( o )
 Self.shortName = 'Entity';
 
 // --
-// routines
+// implementation
 // --
 
 function init( o )
@@ -86,7 +86,7 @@ function templateDataMake()
 
   _.assert( _.objectIs( fields ) );
 
-  self.templateData = _.mapExtend( null, base, fields );
+  self.templateData = _.props.extend( null, base, fields );
 
   self._templateDataMake();
 

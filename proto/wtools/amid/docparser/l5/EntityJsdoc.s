@@ -16,7 +16,7 @@ function wEntityJsdoc( o )
 Self.shortName = 'EntityJsdoc';
 
 // --
-// routines
+// implementation
 // --
 
 function _form()

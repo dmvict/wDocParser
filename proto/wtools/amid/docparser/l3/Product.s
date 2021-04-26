@@ -16,7 +16,7 @@ function wProduct( o )
 Self.shortName = 'Product';
 
 // --
-// routines
+// implementation
 // --
 
 function init( o )

@@ -16,7 +16,7 @@ function wParserAbstact( o )
 Self.shortName = 'ParserAbstract';
 
 // --
-// routines
+// implementation
 // --
 
 function init( o )

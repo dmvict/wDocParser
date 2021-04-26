@@ -23,7 +23,7 @@ function wParserJsdoc( o )
 Self.shortName = 'ParserJsdoc';
 
 // --
-// routines
+// implementation
 // --
 
 function _form()
