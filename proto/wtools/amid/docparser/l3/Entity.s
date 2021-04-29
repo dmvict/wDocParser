@@ -30,10 +30,10 @@ function init( o )
   if( o )
   self.copy( o );
 
-  _.assert( _.objectIs( self.structure ) );
+  _.assert( _.object.isBasic( self.structure ) );
   _.assert( _.strIs( self.comment ) );
   _.assert( _.strIs( self.filePath ) );
-  _.assert( _.objectIs( self.position ) );
+  _.assert( _.object.isBasic( self.position ) );
 
 
 }
@@ -78,13 +78,13 @@ function templateDataMake()
   let self = this;
   let type = self.typeGet();
 
-  if( _.objectIs( self.templateData ) )
+  if( _.object.isBasic( self.templateData ) )
   return self.templateData;
 
   let base = EntityPropertiesByType.base;
   let fields = EntityPropertiesByType[ type ];
 
-  _.assert( _.objectIs( fields ) );
+  _.assert( _.object.isBasic( fields ) );
 
   self.templateData = _.props.extend( null, base, fields );
 

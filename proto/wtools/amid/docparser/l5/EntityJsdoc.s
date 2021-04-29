@@ -92,7 +92,7 @@ function _templateDataMake()
   let self = this;
   let type = self.typeGet();
 
-  _.assert( _.objectIs( self.templateData ) );
+  _.assert( _.object.isBasic( self.templateData ) );
 
   let td = self.templateData;
   let tags = self.tags;
@@ -253,7 +253,7 @@ function _templateDataMake()
     if( arguments.length === 2 )
     postfix = '';
 
-    if( !_.objectIs( type ) )
+    if( !_.object.isBasic( type ) )
     {
       if( self.verbosity )
       _.errLogOnce( `Failed to get type of param tag: ${_.entity.exportJs( paramTag )}. \n Comment:${self.comment}` );
@@ -355,7 +355,7 @@ function _templateDataMake()
 
       let result = _.arrayAs( tags[ key ] ).map( ( e ) =>
       {
-        _.assert( _.objectIs( e ), `Expects single ${key} tag` );
+        _.assert( _.object.isBasic( e ), `Expects single ${key} tag` );
 
         let returns =
         {
