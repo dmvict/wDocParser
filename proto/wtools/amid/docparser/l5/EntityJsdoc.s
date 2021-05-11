@@ -101,7 +101,7 @@ function _templateDataMake()
 
   if( description )
   {
-    description = _.strLinesStrip( description );
+    description = _.str.lines.strip( description );
     // let lines = _.strLinesSplit( description );
     // td.summary = lines.shift();
     // td.description = lines.join('\n');
