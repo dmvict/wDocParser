@@ -63,7 +63,7 @@ function form()
 function addEntity( entity )
 {
   let self = this;
-  let entities = _.arrayAs( entity );
+  let entities = _.array.as( entity );
   entities.forEach( ( entity ) =>
   {
     self._addEntity( entity );

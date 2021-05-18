@@ -122,7 +122,7 @@ function _tagsToMap( structure )
   {
     if( tags[ tag.title ] )
     {
-      tags[ tag.title ] = _.arrayAs( tags[ tag.title ] );
+      tags[ tag.title ] = _.array.as( tags[ tag.title ] );
       tags[ tag.title ].push( tag );
     }
     else

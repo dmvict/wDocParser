@@ -152,7 +152,7 @@ function _templateDataMake()
     paramTypeMake( td, tags.typedef )
 
     if( tags.property )
-    td.properties = _.arrayAs( tags.property ).map( ( e ) =>
+    td.properties = _.array.as( tags.property ).map( ( e ) =>
     {
       let property =
       {
@@ -202,7 +202,7 @@ function _templateDataMake()
     //
 
     if( tags.example )
-    td.examples = _.arrayAs( tags.example ).map( ( e ) =>
+    td.examples = _.array.as( tags.example ).map( ( e ) =>
     {
       return { code : e.description }
     })
@@ -210,7 +210,7 @@ function _templateDataMake()
     //
 
     if( tags.throws )
-    td.throws = _.arrayAs( tags.throws ).map( ( e ) =>
+    td.throws = _.array.as( tags.throws ).map( ( e ) =>
     {
       let returnDescriptor = { description : e.description }
       paramTypeMake( returnDescriptor, e )
@@ -316,7 +316,7 @@ function _templateDataMake()
       if( !tags[ key ] )
       return;
 
-      let result = _.arrayAs( tags[ key ] ).map( ( e ) =>
+      let result = _.array.as( tags[ key ] ).map( ( e ) =>
       {
         let param =
         {
@@ -353,7 +353,7 @@ function _templateDataMake()
       if( !tags[ key ] )
       return;
 
-      let result = _.arrayAs( tags[ key ] ).map( ( e ) =>
+      let result = _.array.as( tags[ key ] ).map( ( e ) =>
       {
         _.assert( _.object.isBasic( e ), `Expects single ${key} tag` );
 
