@@ -5,7 +5,7 @@
 'use strict';
 
 const _ = _global_.wTools;
-const Self = _.docgen = _.docgen || Object.create( null );
+_.docgen = _.docgen || Object.create( null );
 
 let vectorize = _.routineDefaults( null, _.vectorize, { vectorizingContainerAdapter : 1, unwrapingContainerAdapter : 0 } );
 let vectorizeAll = _.routineDefaults( null, _.vectorizeAll, { vectorizingContainerAdapter : 1, unwrapingContainerAdapter : 0 } );
@@ -37,7 +37,7 @@ let Extension =
 
 }
 
-_.props.extend( Self, Extension );
+/* _.props.extend */Object.assign( _.docgen, Extension );
 
 //
 
