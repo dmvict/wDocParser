@@ -1,11 +1,11 @@
 {
   "name" : "wdocparser",
-  "version" : "0.3.132",
+  "version" : "0.3.133",
   "description" : "Module for parsing documentation inlined into source code.",
   "author" : "Kostiantyn Wandalen <wanalen@01.school>",
   "license" : "MIT",
   "main" : "proto/node_modules/wdocparser",
-  "files" : [ "proto/wtools/amid/docparser", "proto/node_modules" ],
+  "files" : [ "proto/wtools/amid/docparser", "proto/node_modules", "proto/node_modules/Tools", "proto/node_modules/wdocparser" ],
   "scripts" : { "test" : "wtest .run 'proto/**' rapidity:-3", "docgen" : "wdocgen .build proto" },
   "repository" :
   {
