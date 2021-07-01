@@ -1,33 +1,43 @@
 {
-  "name" : "wdocparser",
-  "version" : "0.3.133",
-  "description" : "Module for parsing documentation inlined into source code.",
-  "author" : "Kostiantyn Wandalen <wanalen@01.school>",
-  "license" : "MIT",
-  "main" : "proto/node_modules/wdocparser",
-  "files" : [ "proto/wtools/amid/docparser", "proto/node_modules", "proto/node_modules/Tools", "proto/node_modules/wdocparser" ],
-  "scripts" : { "test" : "wtest .run 'proto/**' rapidity:-3", "docgen" : "wdocgen .build proto" },
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "https ://github.com/Wandalen/wDocParser.git"
+  "name": "wdocparser",
+  "version": "0.3.134",
+  "description": "Module for parsing documentation inlined into source code.",
+  "author": "Kostiantyn Wandalen <wanalen@01.school>",
+  "license": "MIT",
+  "main": "proto/node_modules/wdocparser",
+  "files": [
+    "proto/wtools/amid/docparser",
+    "proto/node_modules",
+    "proto/node_modules/Tools",
+    "proto/node_modules/wdocparser"
+  ],
+  "scripts": {
+    "test": "wtest .run 'proto/**' rapidity:-3",
+    "docgen": "wdocgen .build proto"
   },
-  "bugs" :
-  {
-    "url" : "https ://github.com/Wandalen/wDocParser/issues"
+  "repository": {
+    "type": "git",
+    "url": "https ://github.com/Wandalen/wDocParser.git"
   },
-  "dependencies" :
-  {
-    "wTools" : "gamma",
-    "wFiles" : "gamma",
-    "wCopyable" : "gamma",
-    "wConsequence" : "gamma",
-    "wlooker" : "gamma",
-    "wlookerextra" : "gamma",
-    "wschema" : "gamma",
-    "wintrospector" : "gamma",
-    "doctrine" : "3.0.0"
+  "bugs": {
+    "url": "https ://github.com/Wandalen/wDocParser/issues"
   },
-  "devDependencies" : { "eslint" : "7.1.0", "wTesting" : "gamma" },
-  "keywords" : [ "wTools" ]
+  "dependencies": {
+    "wTools": "gamma",
+    "wschema": "gamma",
+    "wlookerextra": "gamma",
+    "wlooker": "gamma",
+    "wintrospector": "gamma",
+    "wFiles": "gamma",
+    "wCopyable": "gamma",
+    "wConsequence": "gamma",
+    "doctrine": "3.0.0"
+  },
+  "devDependencies": {
+    "wTesting": "gamma",
+    "eslint": "7.1.0"
+  },
+  "keywords": [
+    "wTools"
+  ]
 }
