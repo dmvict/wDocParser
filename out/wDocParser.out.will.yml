@@ -3,8 +3,8 @@ root:
   - wDocParser.out
 consistency:
   ../will.yml: &ref_0
-    hash: 4635ae8b2e8e8058d0682b41a7f5b2a2
-    size: 6677
+    hash: 515a7e1b071c597070c6e69d7b5a20f6
+    size: 6536
 module:
   wDocParser.out:
     about:
@@ -405,9 +405,6 @@ module:
           content: npm
         inherit:
           - module.export
-      npm.publish:
-        opts:
-          shell: npm publish
       npm.generate.debug.raw:
         opts:
           entryPath: 'path::entry.out.*=1'
@@ -743,12 +740,6 @@ module:
           - 'step::doc.export'
         criterion:
           content: doc
-          export: 1
-      npm.export:
-        steps:
-          - 'step::npm.publish'
-        criterion:
-          content: npm
           export: 1
       export:
         steps:
@@ -1112,9 +1103,6 @@ module:
           content: npm
         inherit:
           - module.export
-      npm.publish:
-        opts:
-          shell: npm publish
       npm.generate.debug.raw:
         opts:
           entryPath: 'path::entry.out.*=1'
@@ -1451,12 +1439,6 @@ module:
         criterion:
           content: doc
           export: 1
-      npm.export:
-        steps:
-          - 'step::npm.publish'
-        criterion:
-          content: npm
-          export: 1
       export:
         steps:
           - 'build::proto.export'
@@ -1514,5 +1496,5 @@ module:
           - 'build::npm'
     consistency:
       ../will.yml:
-        hash: 4635ae8b2e8e8058d0682b41a7f5b2a2
-        size: 6677
+        hash: 515a7e1b071c597070c6e69d7b5a20f6
+        size: 6536
