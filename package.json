@@ -1,6 +1,6 @@
 {
   "name": "wdocparser",
-  "version": "0.3.156",
+  "version": "0.3.157",
   "description": "Module for parsing documentation inlined into source code.",
   "author": "Kostiantyn Wandalen <wanalen@01.school>",
   "license": "MIT",
@@ -23,18 +23,18 @@
     "url": "https ://github.com/Wandalen/wDocParser/issues"
   },
   "dependencies": {
-    "wTools": "gamma",
-    "wschema": "gamma",
-    "wlookerextra": "gamma",
-    "wlooker": "gamma",
-    "wintrospector": "gamma",
-    "wFiles": "gamma",
-    "wCopyable": "gamma",
-    "wConsequence": "gamma",
+    "wTools": "delta",
+    "wschema": "delta",
+    "wlookerextra": "delta",
+    "wlooker": "delta",
+    "wintrospector": "delta",
+    "wFiles": "delta",
+    "wCopyable": "delta",
+    "wConsequence": "delta",
     "doctrine": "3.0.0"
   },
   "devDependencies": {
-    "wTesting": "gamma",
+    "wTesting": "delta",
     "eslint": "7.32.0"
   },
   "keywords": [
