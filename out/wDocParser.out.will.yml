@@ -3,8 +3,8 @@ root:
   - wDocParser.out
 consistency:
   ../will.yml: &ref_0
-    hash: 515a7e1b071c597070c6e69d7b5a20f6
-    size: 6536
+    hash: 8c11123703c65fe6cd76d8993ece986e
+    size: 6544
 module:
   wDocParser.out:
     about:
@@ -1496,5 +1496,5 @@ module:
           - 'build::npm'
     consistency:
       ../will.yml:
-        hash: 515a7e1b071c597070c6e69d7b5a20f6
-        size: 6536
+        hash: 8c11123703c65fe6cd76d8993ece986e
+        size: 6544
