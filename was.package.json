@@ -2,7 +2,7 @@
   "name": "wdocparser",
   "version": "0.3.160",
   "description": "Module for parsing documentation inlined into source code.",
-  "author": "Kostiantyn Wandalen <wanalen@01.school>",
+  "author": "Kostiantyn Wandalen <wandalen@obox.systems>",
   "license": "MIT",
   "main": "proto/node_modules/wdocparser",
   "files": [
